@@ -20,19 +20,19 @@ export default async function SalesPage({
   const data = await getSalesPageData(supabase, searchParams);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5 md:space-y-6">
       <PageHeader
-        eyebrow="Operação"
+        eyebrow="Operacao"
         title="Vendas"
-        description="Cadastre, filtre e acompanhe o histórico de vendas."
+        description="Cadastre, filtre e acompanhe o historico de vendas."
         action={
-          <Link href="/sales/new" className={buttonVariants({})}>
+          <Link href="/sales/new" className={buttonVariants({ className: "w-full sm:w-auto" })}>
             Nova venda
           </Link>
         }
       />
 
-      <div className="grid gap-5 md:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-3 lg:gap-5">
         <MetricCard
           title="Registros encontrados"
           value={String(data.totalCount)}
@@ -42,14 +42,14 @@ export default async function SalesPage({
         <MetricCard
           title="Produtos mapeados"
           value={String(data.productOptions.length)}
-          description="Produtos disponíveis no filtro."
+          description="Produtos disponiveis no filtro."
           icon={PackageSearch}
           tone="accent"
         />
         <MetricCard
-          title="Itens nesta página"
+          title="Itens nesta pagina"
           value={String(data.sales.length)}
-          description="Registros exibidos nesta página."
+          description="Registros exibidos nesta pagina."
           icon={Layers3}
           tone="success"
         />

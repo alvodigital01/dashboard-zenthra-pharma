@@ -54,7 +54,7 @@ export function MetricCard({
 }) {
   return (
     <Card className={cn("brand-shell brand-frost flex h-full flex-col overflow-hidden", className)}>
-      <CardHeader className="pb-5">
+      <CardHeader className="pb-4 md:pb-5">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0 space-y-4">
             <CardDescription className="max-w-[14rem]">{title}</CardDescription>
@@ -62,7 +62,7 @@ export function MetricCard({
           </div>
           <div
             className={cn(
-              "rounded-[22px] p-3.5",
+              "rounded-[18px] p-3 md:rounded-[22px] md:p-3.5",
               tone === "success"
                 ? "bg-emerald-50 text-emerald-700"
                 : tone === "accent"
@@ -76,7 +76,7 @@ export function MetricCard({
       </CardHeader>
       <CardContent className="flex flex-1 flex-col pt-0">
         <div className="brand-divider mb-4 h-px w-full" />
-        <p className="text-sm leading-6 text-muted-foreground">{description}</p>
+        <p className="text-sm leading-6 text-muted-foreground md:leading-7">{description}</p>
       </CardContent>
     </Card>
   );

@@ -42,9 +42,9 @@ export function RevenueAreaChart({
         <CardDescription>{description}</CardDescription>
         <CardTitle>{title}</CardTitle>
       </CardHeader>
-      <CardContent className="h-[360px] pt-0">
+      <CardContent className="h-[300px] pt-0 sm:h-[340px] xl:h-[360px]">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data}>
+          <AreaChart data={data} margin={{ left: -12, right: 8, top: 8 }}>
             <defs>
               <linearGradient id="revenueGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor="#1f5aa6" stopOpacity={0.24} />
@@ -52,8 +52,13 @@ export function RevenueAreaChart({
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="4 6" vertical={false} stroke="#dbe4f0" />
-            <XAxis dataKey="label" axisLine={false} tickLine={false} tick={{ fill: "#64748b" }} />
-            <YAxis axisLine={false} tickLine={false} tick={{ fill: "#64748b" }} />
+            <XAxis
+              dataKey="label"
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: "#64748b", fontSize: 12 }}
+            />
+            <YAxis axisLine={false} tickLine={false} tick={{ fill: "#64748b", fontSize: 12 }} />
             <Tooltip
               contentStyle={{
                 borderRadius: 20,

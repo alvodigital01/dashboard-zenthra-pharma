@@ -30,12 +30,17 @@ export function SalesBarChart({
         <CardDescription>Semana atual</CardDescription>
         <CardTitle>Vendas por dia</CardTitle>
       </CardHeader>
-      <CardContent className="h-[360px] pt-0">
+      <CardContent className="h-[300px] pt-0 sm:h-[340px] xl:h-[360px]">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data}>
+          <BarChart data={data} margin={{ left: -12, right: 8, top: 8 }}>
             <CartesianGrid strokeDasharray="4 6" vertical={false} stroke="#dbe4f0" />
-            <XAxis dataKey="label" axisLine={false} tickLine={false} tick={{ fill: "#64748b" }} />
-            <YAxis axisLine={false} tickLine={false} tick={{ fill: "#64748b" }} />
+            <XAxis
+              dataKey="label"
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: "#64748b", fontSize: 12 }}
+            />
+            <YAxis axisLine={false} tickLine={false} tick={{ fill: "#64748b", fontSize: 12 }} />
             <Tooltip
               cursor={{ fill: "rgba(15, 23, 42, 0.03)" }}
               contentStyle={{

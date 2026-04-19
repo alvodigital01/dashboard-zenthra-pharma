@@ -123,3 +123,22 @@ input[type="number"] {
   border-radius: 999px;
   background: rgba(148, 163, 184, 0.22);
 }
+
+@media (max-width: 767px) {
+  body {
+    background-image:
+      radial-gradient(circle at top left, rgba(16, 64, 145, 0.08), transparent 24%),
+      linear-gradient(180deg, rgba(248, 250, 252, 1) 0%, rgba(241, 245, 249, 1) 100%);
+  }
+
+  body::before {
+    background:
+      radial-gradient(circle at 0% 12%, rgba(13, 46, 104, 0.05), transparent 28%),
+      radial-gradient(circle at 100% 0%, rgba(10, 96, 130, 0.04), transparent 24%);
+  }
+
+  body::after {
+    opacity: 0.18;
+    background-size: auto, 22px 22px, 22px 22px;
+  }
+}

@@ -20,7 +20,7 @@ export function buttonVariants({
   className?: string;
 }) {
   return cn(
-    "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-[0.01em] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60",
+    "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-[0.01em] transition-all duration-200 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60",
     variant === "primary" &&
       "bg-[linear-gradient(135deg,rgba(13,33,74,1),rgba(18,61,122,1))] text-primary-foreground shadow-float hover:-translate-y-0.5 hover:brightness-[1.03]",
     variant === "secondary" &&

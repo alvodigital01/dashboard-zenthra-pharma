@@ -32,9 +32,15 @@ export function LogoutButton() {
   };
 
   return (
-    <Button variant="outline" size="sm" onClick={handleLogout} disabled={isPending}>
+    <Button
+      variant="outline"
+      size="sm"
+      onClick={handleLogout}
+      disabled={isPending}
+      className="h-11 rounded-[18px] px-3.5 sm:px-4"
+    >
       <LogOut className="h-4 w-4" />
-      {isPending ? "Saindo..." : "Sair"}
+      <span className="hidden sm:inline">{isPending ? "Saindo..." : "Sair"}</span>
     </Button>
   );
 }

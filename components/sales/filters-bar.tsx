@@ -111,7 +111,7 @@ export function FiltersBar({
             Filtros e recortes
           </div>
 
-          <div className="grid gap-4 xl:grid-cols-[1.5fr_repeat(4,minmax(0,1fr))]">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-[1.5fr_repeat(4,minmax(0,1fr))]">
             {showSearch ? (
               <div className="space-y-2">
                 <label className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-slate-500">
@@ -227,16 +227,19 @@ export function FiltersBar({
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 border-t border-[rgba(16,46,94,0.08)] pt-1">
-            <Button type="submit" disabled={isPending}>
+          <div className="flex flex-col gap-3 border-t border-[rgba(16,46,94,0.08)] pt-1 sm:flex-row sm:flex-wrap sm:items-center">
+            <Button type="submit" disabled={isPending} className="w-full sm:w-auto">
               Aplicar
             </Button>
-            <Button type="button" variant="ghost" onClick={handleReset}>
+            <Button type="button" variant="ghost" onClick={handleReset} className="w-full sm:w-auto">
               <RotateCcw className="h-4 w-4" />
               Limpar
             </Button>
             {allowExport ? (
-              <Link href={exportHref} className={buttonVariants({ variant: "outline" })}>
+              <Link
+                href={exportHref}
+                className={buttonVariants({ variant: "outline", className: "w-full sm:w-auto" })}
+              >
                 <Download className="h-4 w-4" />
                 Exportar CSV
               </Link>

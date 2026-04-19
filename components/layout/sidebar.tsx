@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 const navigationItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
   { href: "/sales", label: "Vendas", icon: BarChart3 },
-  { href: "/reports", label: "Relatórios", icon: FileBarChart2 }
+  { href: "/reports", label: "Relatorios", icon: FileBarChart2 }
 ];
 
 function isActivePath(pathname: string, href: string) {
@@ -35,15 +35,15 @@ export function Sidebar({
     <>
       <div
         className={cn(
-          "fixed inset-0 z-40 bg-slate-950/50 backdrop-blur-sm transition md:hidden",
+          "fixed inset-0 z-40 bg-slate-950/50 backdrop-blur-sm transition duration-300 md:hidden",
           isMobileOpen ? "opacity-100" : "pointer-events-none opacity-0"
         )}
         onClick={onClose}
       />
       <aside
         className={cn(
-          "fixed inset-y-4 left-4 z-50 flex w-[292px] flex-col overflow-hidden rounded-[34px] border border-white/10 bg-brand-veil px-5 py-6 text-white shadow-float transition md:sticky md:top-4 md:h-[calc(100vh-2rem)] md:translate-x-0 md:self-start",
-          isMobileOpen ? "translate-x-0" : "-translate-x-[120%]"
+          "fixed inset-y-2 left-2 z-50 flex w-[calc(100vw-1rem)] max-w-[360px] flex-col overflow-hidden rounded-[30px] border border-white/10 bg-brand-veil px-4 py-4 text-white shadow-float transition-all duration-300 md:sticky md:top-4 md:h-[calc(100vh-2rem)] md:w-[292px] md:max-w-none md:self-start md:rounded-[34px] md:px-5 md:py-6",
+          isMobileOpen ? "translate-x-0 opacity-100" : "-translate-x-[108%] opacity-0 md:translate-x-0 md:opacity-100"
         )}
       >
         <div className="pointer-events-none absolute inset-0">
@@ -52,11 +52,11 @@ export function Sidebar({
         </div>
 
         <div className="relative flex h-full min-h-0 flex-col">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-3">
             <BrandLogo compact theme="dark" />
             <button
               type="button"
-              className="rounded-2xl p-2 text-slate-400 transition hover:bg-white/10 hover:text-white md:hidden"
+              className="rounded-2xl border border-white/10 bg-white/5 p-2.5 text-slate-300 transition hover:bg-white/10 hover:text-white md:hidden"
               onClick={onClose}
               aria-label="Fechar menu"
             >
@@ -64,30 +64,30 @@ export function Sidebar({
             </button>
           </div>
 
-          <div className="sidebar-scroll mt-8 min-h-0 flex-1 space-y-8 overflow-y-auto pr-1">
-            <div className="rounded-[28px] border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
+          <div className="sidebar-scroll mt-6 min-h-0 flex-1 space-y-6 overflow-y-auto pr-1 md:mt-8 md:space-y-8">
+            <div className="rounded-[24px] border border-white/10 bg-white/5 p-4 backdrop-blur-sm md:rounded-[28px] md:p-5">
               <p className="text-[0.68rem] uppercase tracking-[0.24em] text-slate-400">
                 Ambiente comercial
               </p>
-              <div className="mt-4 space-y-3">
-                <p className="text-2xl font-semibold tracking-[-0.04em] text-white">
+              <div className="mt-4 space-y-2.5">
+                <p className="text-xl font-semibold tracking-[-0.04em] text-white md:text-2xl">
                   Painel executivo
                 </p>
-                <p className="text-sm leading-7 text-slate-300">
-                  Visão clara da operação comercial.
+                <p className="text-sm leading-6 text-slate-300 md:leading-7">
+                  Visao clara da operacao comercial.
                 </p>
               </div>
-              <div className="mt-5 h-px w-full brand-divider" />
+              <div className="brand-divider mt-5 h-px w-full" />
               <p className="mt-4 text-sm leading-6 text-slate-300">
-                Vendas, faturamento e histórico em um só lugar.
+                Vendas, faturamento e historico em um so lugar.
               </p>
             </div>
 
             <div>
               <p className="px-3 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-slate-500">
-                Navegação
+                Navegacao
               </p>
-              <nav className="mt-4 space-y-2">
+              <nav className="mt-4 space-y-2.5">
                 {navigationItems.map((item) => {
                   const Icon = item.icon;
                   const active = isActivePath(pathname, item.href);
@@ -97,7 +97,7 @@ export function Sidebar({
                       key={item.href}
                       href={item.href}
                       className={cn(
-                        "group flex items-center gap-3 rounded-[22px] px-4 py-3.5 text-sm font-medium transition",
+                        "group flex items-center gap-3 rounded-[20px] px-3.5 py-3.5 text-sm font-medium transition md:rounded-[22px] md:px-4",
                         active
                           ? "bg-white text-slate-950 shadow-soft"
                           : "text-slate-300 hover:bg-white/[0.08] hover:text-white"
@@ -124,9 +124,9 @@ export function Sidebar({
             </div>
           </div>
 
-          <div className="mt-6 space-y-3 rounded-[28px] border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+          <div className="mt-4 space-y-3 rounded-[24px] border border-white/10 bg-white/5 p-4 backdrop-blur-sm md:mt-6 md:rounded-[28px]">
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-slate-400">
-              Ação rápida
+              Acao rapida
             </p>
             <Link
               href="/sales/new"
