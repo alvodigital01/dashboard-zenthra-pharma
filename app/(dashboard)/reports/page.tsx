@@ -49,7 +49,7 @@ export default async function ReportsPage({
         </p>
       </div>
 
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-5 md:grid-cols-2 2xl:grid-cols-4">
         <MetricCard
           title="Total vendido"
           value={formatNumber(data.summary.totalQuantity)}

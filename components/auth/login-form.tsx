@@ -128,7 +128,9 @@ export function LoginForm() {
         {isPending ? "Entrando..." : "Entrar no painel"}
       </Button>
 
-      <p className="text-center text-sm leading-6 text-slate-500">Acesse vendas, indicadores e relatórios.</p>
+      <p className="text-center text-sm leading-6 text-slate-500">
+        Acesse vendas, indicadores e relatórios.
+      </p>
     </form>
   );
 }

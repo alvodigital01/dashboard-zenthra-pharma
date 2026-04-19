@@ -32,7 +32,7 @@ export function Pagination({
   return (
     <div className="flex flex-col gap-3 rounded-[24px] border border-white/80 bg-white/90 p-4 shadow-panel sm:flex-row sm:items-center sm:justify-between md:rounded-[30px] md:p-5">
       <p className="text-sm text-muted-foreground">
-        Pagina <span className="font-semibold text-slate-900">{currentPage}</span> de{" "}
+        Página <span className="font-semibold text-slate-900">{currentPage}</span> de{" "}
         <span className="font-semibold text-slate-900">{totalPages}</span>
       </p>
       <div className="flex items-center gap-2">
@@ -55,7 +55,7 @@ export function Pagination({
               currentPage === totalPages ? "pointer-events-none flex-1 opacity-50 sm:flex-none" : "flex-1 sm:flex-none"
           })}
         >
-          Proxima
+          Próxima
         </Link>
       </div>
     </div>

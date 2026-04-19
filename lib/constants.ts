@@ -14,8 +14,8 @@ export const FILTER_PERIODS = [
 
 export const PAGE_TITLES: Record<string, { title: string; description: string }> = {
   "/": {
-    title: "Dashboard comercial",
-    description: "Vendas, faturamento e histórico em um só lugar."
+    title: "Dashboard Zenthra",
+    description: ""
   },
   "/sales": {
     title: "Vendas",

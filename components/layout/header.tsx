@@ -12,7 +12,7 @@ function resolvePageMeta(pathname: string) {
   if (pathname.startsWith("/sales/") && pathname.endsWith("/edit")) {
     return {
       title: "Editar venda",
-      description: "Edite a venda sem perder o historico."
+      description: "Edite a venda sem perder o histórico."
     };
   }
 
@@ -39,37 +39,28 @@ export function Header({
   }).format(new Date());
 
   return (
-    <header className="glass-panel sticky top-3 z-30 rounded-[26px] border border-white/80 px-4 py-4 shadow-panel md:top-4 md:rounded-[30px] md:px-6">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex min-w-0 items-start gap-3 md:gap-4">
-          <Button
-            variant="outline"
-            size="icon"
-            className="h-11 w-11 rounded-[18px] border-white/70 bg-white/85 md:hidden"
-            onClick={onOpenMenu}
-          >
-            <Menu className="h-5 w-5" />
-          </Button>
+    <header className="glass-panel sticky top-3 z-30 rounded-[22px] border border-white/80 px-4 py-3 shadow-panel md:top-4 md:rounded-[30px] md:px-6 md:py-4">
+      <div className="space-y-3 md:space-y-4">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex min-w-0 items-center gap-3">
+            <Button
+              variant="outline"
+              size="icon"
+              className="h-10 w-10 rounded-[16px] border-white/70 bg-white/85 md:hidden"
+              onClick={onOpenMenu}
+            >
+              <Menu className="h-4.5 w-4.5" />
+            </Button>
 
-          <div className="min-w-0 space-y-2">
-            <div className="flex flex-wrap items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-slate-500">
+            <div className="hidden flex-wrap items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-slate-500 md:flex">
               <span>Zenthra pharma</span>
               <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
               <span className="truncate">{meta.title}</span>
             </div>
-
-            <div className="space-y-1">
-              <h2 className="text-[1.35rem] font-semibold tracking-[-0.03em] text-slate-950 sm:text-[1.55rem]">
-                {meta.title}
-              </h2>
-              <p className="max-w-2xl text-sm leading-6 text-muted-foreground">{meta.description}</p>
-            </div>
           </div>
-        </div>
 
-        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between lg:justify-end">
-          <div className="flex items-center justify-between gap-3 sm:w-auto sm:justify-start">
-            <div className="hidden items-center gap-3 rounded-[22px] border border-[rgba(16,46,94,0.08)] bg-white/[0.88] px-4 py-3 lg:flex">
+          <div className="flex items-center gap-3">
+            <div className="hidden items-center gap-3 rounded-[22px] border border-[rgba(16,46,94,0.08)] bg-white/[0.88] px-4 py-3 xl:flex">
               <div className="rounded-2xl bg-primary/[0.06] p-2 text-primary">
                 <CalendarDays className="h-4 w-4" />
               </div>
@@ -83,8 +74,21 @@ export function Header({
 
             <LogoutButton />
           </div>
+        </div>
 
-          <div className="flex min-w-0 items-center gap-3 rounded-[22px] border border-[rgba(16,46,94,0.08)] bg-white/[0.88] px-4 py-3">
+        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div className="min-w-0 space-y-1.5">
+            <h2 className="text-[1.2rem] font-semibold tracking-[-0.03em] text-slate-950 sm:text-[1.35rem] md:text-[1.55rem]">
+              {meta.title}
+            </h2>
+            {meta.description ? (
+              <p className="max-w-2xl text-sm leading-5 text-muted-foreground md:leading-6">
+                {meta.description}
+              </p>
+            ) : null}
+          </div>
+
+          <div className="hidden min-w-0 items-center gap-3 rounded-[22px] border border-[rgba(16,46,94,0.08)] bg-white/[0.88] px-4 py-3 sm:flex">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[18px] bg-primary text-sm font-semibold text-white">
               {getInitials(userEmail)}
             </div>
@@ -92,7 +96,7 @@ export function Header({
               <p className="truncate text-sm font-semibold text-slate-900">{userEmail}</p>
               <p className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" />
-                Sessao autenticada
+                Sessão autenticada
               </p>
             </div>
           </div>

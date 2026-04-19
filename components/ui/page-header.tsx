@@ -42,10 +42,10 @@ export function PageHeader({
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
           <div className="hidden rounded-[28px] border border-[rgba(15,44,88,0.08)] bg-[linear-gradient(135deg,rgba(15,42,86,0.04),rgba(10,107,144,0.08))] px-5 py-4 xl:block">
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-slate-500">
-              Leitura rapida
+              Leitura rápida
             </p>
             <p className="mt-2 max-w-[220px] text-sm leading-6 text-slate-600">
-              Painel com foco em clareza e operacao.
+              Painel com foco em clareza e operação.
             </p>
           </div>
           {action ? <div className="flex w-full items-center gap-3 sm:w-auto">{action}</div> : null}

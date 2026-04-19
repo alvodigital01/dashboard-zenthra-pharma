@@ -10,18 +10,43 @@ function MetricValue({ value }: { value: string }) {
   if (currencyMatch) {
     const amount = currencyMatch[1] ?? "";
     const [integerPart, decimalPart] = amount.split(",");
+    const isLongCurrency = integerPart.replace(/\./g, "").length >= 5;
 
     return (
       <div className="w-full overflow-hidden">
-        <div className="flex min-w-0 max-w-full items-end gap-1 whitespace-nowrap leading-none">
-          <span className="shrink-0 pb-1 text-base font-semibold tracking-[-0.03em] text-slate-500">
+        <div
+          className={cn(
+            "flex min-w-0 max-w-full items-end whitespace-nowrap leading-none",
+            isLongCurrency ? "gap-0.5" : "gap-1"
+          )}
+        >
+          <span
+            className={cn(
+              "shrink-0 font-semibold tracking-[-0.03em] text-slate-500",
+              isLongCurrency ? "pb-0.5 text-sm" : "pb-1 text-base"
+            )}
+          >
             R$
           </span>
-          <span className="min-w-0 truncate text-[clamp(1.75rem,0.85vw+1.45rem,2.55rem)] font-semibold tracking-[-0.07em] text-slate-950 tabular-nums">
+          <span
+            className={cn(
+              "min-w-0 truncate font-semibold text-slate-950 tabular-nums",
+              isLongCurrency
+                ? "text-[clamp(1.45rem,0.45vw+1.2rem,2rem)] tracking-[-0.06em]"
+                : "text-[clamp(1.75rem,0.85vw+1.45rem,2.55rem)] tracking-[-0.07em]"
+            )}
+          >
             {integerPart}
           </span>
           {decimalPart ? (
-            <span className="shrink-0 pb-1 text-[clamp(0.95rem,0.28vw+0.9rem,1.2rem)] font-semibold tracking-[-0.04em] text-slate-500 tabular-nums">
+            <span
+              className={cn(
+                "shrink-0 font-semibold tracking-[-0.04em] text-slate-500 tabular-nums",
+                isLongCurrency
+                  ? "pb-0.5 text-[0.95rem]"
+                  : "pb-1 text-[clamp(0.95rem,0.28vw+0.9rem,1.2rem)]"
+              )}
+            >
               ,{decimalPart}
             </span>
           ) : null}

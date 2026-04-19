@@ -39,18 +39,18 @@ function mapSalesError(message: string) {
   const normalized = message.toLowerCase();
 
   if (normalized.includes("row-level security")) {
-    return "Sua sessao nao tem permissao para salvar esta venda. Entre novamente e tente de novo.";
+    return "Sua sessão não tem permissão para salvar esta venda. Entre novamente e tente de novo.";
   }
 
   if (normalized.includes("violates foreign key constraint")) {
-    return "Nao foi possivel vincular a venda ao usuario atual. Entre novamente e tente de novo.";
+    return "Não foi possível vincular a venda ao usuário atual. Entre novamente e tente de novo.";
   }
 
   if (normalized.includes("violates check constraint")) {
-    return "Revise quantidade, valor unitario e status antes de salvar.";
+    return "Revise quantidade, valor unitário e status antes de salvar.";
   }
 
-  return "Nao foi possivel salvar a venda agora. Tente novamente.";
+  return "Não foi possível salvar a venda agora. Tente novamente.";
 }
 
 const saleStatusLabels: Record<SaleStatus, string> = {
@@ -103,7 +103,7 @@ export function SalesForm({
 
     if (userError || !user) {
       setIsPending(false);
-      toast.error("Sua sessao expirou. Entre novamente para cadastrar a venda.");
+      toast.error("Sua sessão expirou. Entre novamente para cadastrar a venda.");
       return;
     }
 

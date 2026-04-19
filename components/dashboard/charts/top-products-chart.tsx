@@ -16,7 +16,7 @@ export function TopProductsChart({
     return (
       <EmptyState
         title="Sem ranking de produtos"
-        description="Os produtos mais vendidos aparecem aqui quando houver vendas validas no mes."
+        description="Os produtos mais vendidos aparecem aqui quando houver vendas válidas no mês."
         icon={BarChart3}
       />
     );
@@ -25,7 +25,7 @@ export function TopProductsChart({
   return (
     <Card className="brand-shell brand-frost h-full overflow-hidden">
       <CardHeader>
-        <CardDescription>Mes atual</CardDescription>
+        <CardDescription>Mês atual</CardDescription>
         <CardTitle>Produtos mais vendidos</CardTitle>
       </CardHeader>
       <CardContent className="h-[300px] pt-0 sm:h-[340px] xl:h-[360px]">

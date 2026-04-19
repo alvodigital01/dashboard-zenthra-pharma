@@ -22,9 +22,9 @@ export default async function SalesPage({
   return (
     <div className="space-y-5 md:space-y-6">
       <PageHeader
-        eyebrow="Operacao"
+        eyebrow="Operação"
         title="Vendas"
-        description="Cadastre, filtre e acompanhe o historico de vendas."
+        description="Cadastre, filtre e acompanhe o histórico de vendas."
         action={
           <Link href="/sales/new" className={buttonVariants({ className: "w-full sm:w-auto" })}>
             Nova venda
@@ -42,14 +42,14 @@ export default async function SalesPage({
         <MetricCard
           title="Produtos mapeados"
           value={String(data.productOptions.length)}
-          description="Produtos disponiveis no filtro."
+          description="Produtos disponíveis no filtro."
           icon={PackageSearch}
           tone="accent"
         />
         <MetricCard
-          title="Itens nesta pagina"
+          title="Itens nesta página"
           value={String(data.sales.length)}
-          description="Registros exibidos nesta pagina."
+          description="Registros exibidos nesta página."
           icon={Layers3}
           tone="success"
         />

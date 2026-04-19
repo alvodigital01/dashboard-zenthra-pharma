@@ -20,8 +20,13 @@ const statusMap: Record<SaleStatus, { label: string; className: string }> = {
   }
 };
 
-export function StatusBadge({ status }: { status: SaleStatus }) {
-  const config = statusMap[status];
+const fallbackStatus = {
+  label: "Status",
+  className: "bg-slate-100 text-slate-700 ring-slate-200"
+};
+
+export function StatusBadge({ status }: { status: string }) {
+  const config = statusMap[status as SaleStatus] ?? fallbackStatus;
 
   return (
     <span

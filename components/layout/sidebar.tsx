@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 const navigationItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
   { href: "/sales", label: "Vendas", icon: BarChart3 },
-  { href: "/reports", label: "Relatorios", icon: FileBarChart2 }
+  { href: "/reports", label: "Relatórios", icon: FileBarChart2 }
 ];
 
 function isActivePath(pathname: string, href: string) {
@@ -74,18 +74,14 @@ export function Sidebar({
                   Painel executivo
                 </p>
                 <p className="text-sm leading-6 text-slate-300 md:leading-7">
-                  Visao clara da operacao comercial.
+                  Visão clara da operação comercial.
                 </p>
               </div>
-              <div className="brand-divider mt-5 h-px w-full" />
-              <p className="mt-4 text-sm leading-6 text-slate-300">
-                Vendas, faturamento e historico em um so lugar.
-              </p>
             </div>
 
             <div>
               <p className="px-3 text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-slate-500">
-                Navegacao
+                Navegação
               </p>
               <nav className="mt-4 space-y-2.5">
                 {navigationItems.map((item) => {
@@ -126,7 +122,7 @@ export function Sidebar({
 
           <div className="mt-4 space-y-3 rounded-[24px] border border-white/10 bg-white/5 p-4 backdrop-blur-sm md:mt-6 md:rounded-[28px]">
             <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-slate-400">
-              Acao rapida
+              Ação rápida
             </p>
             <Link
               href="/sales/new"

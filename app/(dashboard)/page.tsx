@@ -35,15 +35,9 @@ export default async function DashboardPage() {
           </div>
 
           <div className="relative z-10">
-            <span className="inline-flex rounded-full bg-white/10 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-cyan-100">
-              Visao executiva
-            </span>
-            <h1 className="mt-5 max-w-[9ch] font-display text-[clamp(2.5rem,9vw,4.8rem)] leading-[0.92] text-white">
+            <h1 className="max-w-[9ch] font-display text-[clamp(2.5rem,9vw,4.8rem)] leading-[0.92] text-white">
               Dashboard comercial
             </h1>
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base sm:leading-8">
-              Vendas, faturamento e historico em leitura rapida.
-            </p>
 
             <div className="mt-7 grid gap-3 sm:grid-cols-3 md:mt-8 md:gap-4">
               <div className="min-w-0 rounded-[24px] border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm md:rounded-[28px] md:p-5">
@@ -53,7 +47,7 @@ export default async function DashboardPage() {
                 <p className="mt-3 break-words text-[clamp(1.65rem,2.4vw,2.4rem)] font-semibold tracking-[-0.05em] text-white">
                   {formatNumber(data.week.totalQuantity)}
                 </p>
-                <p className="mt-2 text-sm text-slate-300">Validos na semana.</p>
+                <p className="mt-2 text-sm text-slate-300">Válidos na semana.</p>
               </div>
               <div className="min-w-0 rounded-[24px] border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm md:rounded-[28px] md:p-5">
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-slate-400">
@@ -66,12 +60,12 @@ export default async function DashboardPage() {
               </div>
               <div className="min-w-0 rounded-[24px] border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm md:rounded-[28px] md:p-5">
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-slate-400">
-                  Ticket medio
+                  Ticket médio
                 </p>
                 <p className="mt-3 break-words text-[clamp(1.65rem,2.4vw,2.4rem)] font-semibold tracking-[-0.05em] text-white">
                   {formatCurrencyBRL(data.month.averageTicket)}
                 </p>
-                <p className="mt-2 text-sm text-slate-300">Ticket do mes.</p>
+                <p className="mt-2 text-sm text-slate-300">Ticket do mês.</p>
               </div>
             </div>
 
@@ -93,7 +87,7 @@ export default async function DashboardPage() {
                     "w-full border-white/[0.15] bg-white/[0.06] text-white hover:bg-white/10 hover:text-white sm:w-auto"
                 })}
               >
-                Ver relatorios
+                Ver relatórios
               </Link>
             </div>
           </div>
@@ -101,7 +95,7 @@ export default async function DashboardPage() {
 
         <Card className="brand-shell brand-frost h-full overflow-hidden">
           <CardHeader>
-            <CardDescription>Resumo do periodo</CardDescription>
+            <CardDescription>Resumo do período</CardDescription>
             <CardTitle>Panorama</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 pt-0">
@@ -113,7 +107,7 @@ export default async function DashboardPage() {
                 </p>
               </div>
               <div className="rounded-[20px] border border-[rgba(16,46,94,0.08)] bg-slate-50/80 p-4 md:rounded-[24px]">
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-500">Vendas do mes</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-slate-500">Vendas do mês</p>
                 <p className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-slate-950">
                   {formatNumber(data.month.salesCount)}
                 </p>
@@ -129,7 +123,7 @@ export default async function DashboardPage() {
               </p>
               <p className="mt-2 text-sm leading-7 text-slate-300">
                 {topProduct
-                  ? `${formatNumber(topProduct.quantity)} unidades no mes.`
+                  ? `${formatNumber(topProduct.quantity)} unidades no mês.`
                   : "O ranking aparece assim que houver vendas."}
               </p>
             </div>
@@ -140,7 +134,7 @@ export default async function DashboardPage() {
                   <PackageSearch className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-slate-950">Leitura rapida</p>
+                  <p className="text-sm font-semibold text-slate-950">Leitura rápida</p>
                   <p className="text-sm leading-6 text-muted-foreground">
                     Volume, receita e produtos em destaque.
                   </p>
@@ -164,26 +158,26 @@ export default async function DashboardPage() {
           <MetricCard
             title="Produtos vendidos"
             value={formatNumber(data.week.totalQuantity)}
-            description="Vendas pagas e concluidas da semana."
+            description="Vendas pagas e concluídas da semana."
             icon={Box}
           />
           <MetricCard
             title="Vendas registradas"
             value={formatNumber(data.week.salesCount)}
-            description="Registros validos da semana."
+            description="Registros válidos da semana."
             icon={ReceiptText}
             tone="accent"
           />
           <MetricCard
             title="Faturamento"
             value={formatCurrencyBRL(data.week.totalRevenue)}
-            description="Receita valida da semana."
+            description="Receita válida da semana."
             icon={BriefcaseBusiness}
           />
           <MetricCard
-            title="Ticket medio"
+            title="Ticket médio"
             value={formatCurrencyBRL(data.week.averageTicket)}
-            description="Media por venda na semana."
+            description="Média por venda na semana."
             icon={CircleDollarSign}
             tone="success"
           />
@@ -193,36 +187,36 @@ export default async function DashboardPage() {
       <section className="space-y-4">
         <div className="space-y-1">
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-500">
-            Mes atual
+            Mês atual
           </p>
           <h2 className="text-2xl font-semibold tracking-[-0.03em] text-slate-950">
-            Consolidado do mes
+            Consolidado do mês
           </h2>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <MetricCard
             title="Produtos vendidos"
             value={formatNumber(data.month.totalQuantity)}
-            description="Volume valido do mes."
+            description="Volume válido do mês."
             icon={CalendarRange}
           />
           <MetricCard
             title="Vendas registradas"
             value={formatNumber(data.month.salesCount)}
-            description="Registros validos do mes."
+            description="Registros válidos do mês."
             icon={ReceiptText}
             tone="accent"
           />
           <MetricCard
-            title="Faturamento do mes"
+            title="Faturamento do mês"
             value={formatCurrencyBRL(data.month.totalRevenue)}
-            description="Receita valida do mes."
+            description="Receita válida do mês."
             icon={BriefcaseBusiness}
           />
           <MetricCard
-            title="Ticket medio do mes"
+            title="Ticket médio do mês"
             value={formatCurrencyBRL(data.month.averageTicket)}
-            description="Media por venda no mes."
+            description="Média por venda no mês."
             icon={CircleDollarSign}
             tone="success"
           />
@@ -234,7 +228,7 @@ export default async function DashboardPage() {
         <RevenueAreaChart
           data={data.revenueTrend}
           title="Faturamento por dia"
-          description="Evolucao diaria da receita no mes."
+          description="Evolução diária da receita no mês."
         />
       </div>
 
