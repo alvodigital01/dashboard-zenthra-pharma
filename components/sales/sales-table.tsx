@@ -11,7 +11,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { createBrowserSupabaseClient } from "@/lib/supabase/browser";
-import { formatCurrencyBRL, formatDateBR } from "@/lib/utils";
+import { formatCurrencyBRL, formatDateBR, formatPaymentDetails } from "@/lib/utils";
 import type { SaleRecord } from "@/types/sales";
 
 export function SalesTable({ sales }: { sales: SaleRecord[] }) {
@@ -88,6 +88,9 @@ export function SalesTable({ sales }: { sales: SaleRecord[] }) {
                       <div className="truncate text-xs text-muted-foreground">
                         {sale.product_category ?? "Sem categoria"}
                       </div>
+                      <div className="truncate text-xs text-muted-foreground">
+                        {formatPaymentDetails(sale.payment_method, sale.installments)}
+                      </div>
                     </td>
                     <td className="whitespace-nowrap px-5 py-4">
                       <StatusBadge status={sale.status} />
@@ -144,18 +147,24 @@ export function SalesTable({ sales }: { sales: SaleRecord[] }) {
                 </div>
                 <StatusBadge status={sale.status} />
               </div>
-              <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-                <div>
-                  <p className="text-muted-foreground">Quantidade</p>
-                  <p className="font-semibold text-slate-900">{sale.quantity}</p>
-                </div>
-                <div>
-                  <p className="text-muted-foreground">Total</p>
-                  <p className="font-semibold text-slate-900">
-                    {formatCurrencyBRL(Number(sale.total_price))}
-                  </p>
-                </div>
-                <div className="col-span-2">
+                <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
+                  <div>
+                    <p className="text-muted-foreground">Quantidade</p>
+                    <p className="font-semibold text-slate-900">{sale.quantity}</p>
+                  </div>
+                  <div>
+                    <p className="text-muted-foreground">Total</p>
+                    <p className="font-semibold text-slate-900">
+                      {formatCurrencyBRL(Number(sale.total_price))}
+                    </p>
+                  </div>
+                  <div className="col-span-2">
+                    <p className="text-muted-foreground">Pagamento</p>
+                    <p className="font-medium text-slate-900">
+                      {formatPaymentDetails(sale.payment_method, sale.installments)}
+                    </p>
+                  </div>
+                  <div className="col-span-2">
                   <p className="text-muted-foreground">Cliente/Pedido</p>
                   <p className="font-medium text-slate-900">
                     {sale.customer_name ?? sale.order_code ?? "Não informado"}

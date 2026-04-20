@@ -55,6 +55,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=...
    - habilite Email/Password em `Authentication > Providers`
    - crie ao menos um usuario autenticado
 4. Execute o SQL de [supabase/schema.sql](/d:/ESTUDOS/dashboard-zenthra-pharma/supabase/schema.sql:1) no SQL Editor do Supabase.
+5. Se o projeto ja estiver rodando, execute novamente o mesmo SQL para adicionar `payment_method` e `installments` na tabela `sales`.
 
 ## Rodando localmente
 

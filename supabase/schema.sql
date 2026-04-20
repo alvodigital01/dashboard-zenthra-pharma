@@ -10,12 +10,47 @@ create table if not exists public.sales (
   quantity integer not null check (quantity > 0),
   unit_price numeric(12, 2) not null check (unit_price > 0),
   total_price numeric(12, 2) generated always as ((quantity::numeric * unit_price)) stored,
+  payment_method text not null default 'pix',
+  installments integer,
   customer_name text,
   order_code text,
   status text not null check (status in ('pending', 'paid', 'completed', 'cancelled')),
   notes text,
   user_id uuid not null default auth.uid() references auth.users (id) on delete cascade
 );
+
+alter table public.sales
+  add column if not exists payment_method text;
+
+alter table public.sales
+  add column if not exists installments integer;
+
+alter table public.sales
+  alter column payment_method set default 'pix';
+
+update public.sales
+set payment_method = 'pix'
+where payment_method is null;
+
+alter table public.sales
+  alter column payment_method set not null;
+
+alter table public.sales
+  drop constraint if exists sales_payment_method_check;
+
+alter table public.sales
+  add constraint sales_payment_method_check
+  check (payment_method in ('cash', 'pix', 'debit_card', 'credit_card'));
+
+alter table public.sales
+  drop constraint if exists sales_installments_check;
+
+alter table public.sales
+  add constraint sales_installments_check
+  check (
+    (payment_method = 'credit_card' and installments between 1 and 5)
+    or (payment_method <> 'credit_card' and installments is null)
+  );
 
 create index if not exists sales_user_id_idx on public.sales (user_id);
 create index if not exists sales_sale_date_idx on public.sales (sale_date desc);

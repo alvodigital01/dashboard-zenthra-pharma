@@ -3,6 +3,8 @@ export const WEEK_STARTS_ON = 1;
 export const DEFAULT_PAGE_SIZE = 10;
 export const VALID_CALCULATION_STATUSES = ["paid", "completed"] as const;
 export const SALE_STATUSES = ["pending", "paid", "completed", "cancelled"] as const;
+export const PAYMENT_METHODS = ["cash", "pix", "debit_card", "credit_card"] as const;
+export const CREDIT_CARD_MAX_INSTALLMENTS = 5;
 export const FILTER_PERIODS = [
   "all",
   "today",
@@ -11,6 +13,13 @@ export const FILTER_PERIODS = [
   "lastMonth",
   "custom"
 ] as const;
+
+export const PAYMENT_METHOD_LABELS = {
+  cash: "Dinheiro",
+  pix: "Pix",
+  debit_card: "Cartão de débito",
+  credit_card: "Cartão de crédito"
+} as const;
 
 export const PAGE_TITLES: Record<string, { title: string; description: string }> = {
   "/": {

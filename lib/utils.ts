@@ -3,6 +3,9 @@ import { format, parseISO } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { twMerge } from "tailwind-merge";
 
+import { PAYMENT_METHOD_LABELS } from "@/lib/constants";
+import type { PaymentMethod } from "@/types/sales";
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -30,6 +33,23 @@ export function formatMonthLabel(value: string) {
   return format(parseISO(value), "MMM/yyyy", { locale: ptBR });
 }
 
+export function formatPaymentDetails(
+  paymentMethod?: PaymentMethod | null,
+  installments?: number | null
+) {
+  if (!paymentMethod) {
+    return "Pagamento não informado";
+  }
+
+  const baseLabel = PAYMENT_METHOD_LABELS[paymentMethod] ?? "Pagamento";
+
+  if (paymentMethod === "credit_card") {
+    return `${baseLabel} ${installments ?? 1}x`;
+  }
+
+  return baseLabel;
+}
+
 export function getInitials(value: string) {
   const source = value.split("@")[0] ?? value;
   return source
@@ -55,4 +75,3 @@ export function buildSearchParams(
 
   return searchParams.toString();
 }
-

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { StatusBadge } from "@/components/sales/status-badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatCurrencyBRL, formatDateBR } from "@/lib/utils";
+import { formatCurrencyBRL, formatDateBR, formatPaymentDetails } from "@/lib/utils";
 import type { SaleRecord } from "@/types/sales";
 
 export function RecentSalesTable({ sales }: { sales: SaleRecord[] }) {
@@ -43,6 +43,9 @@ export function RecentSalesTable({ sales }: { sales: SaleRecord[] }) {
                       </p>
                       <p className="text-xs text-muted-foreground">
                         {sale.order_code ?? sale.customer_name ?? "Sem identificador"}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {formatPaymentDetails(sale.payment_method, sale.installments)}
                       </p>
                     </div>
                     <StatusBadge status={sale.status} />
@@ -86,6 +89,9 @@ export function RecentSalesTable({ sales }: { sales: SaleRecord[] }) {
                           <div className="font-medium text-slate-900">{sale.product_name}</div>
                           <div className="text-xs text-muted-foreground">
                             {sale.order_code ?? sale.customer_name ?? "Sem identificador"}
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            {formatPaymentDetails(sale.payment_method, sale.installments)}
                           </div>
                         </td>
                         <td className="px-5 py-4">

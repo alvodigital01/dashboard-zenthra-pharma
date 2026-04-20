@@ -12,6 +12,8 @@ export interface Database {
           quantity: number;
           unit_price: number;
           total_price: number;
+          payment_method: "cash" | "pix" | "debit_card" | "credit_card";
+          installments: number | null;
           customer_name: string | null;
           order_code: string | null;
           status: "pending" | "paid" | "completed" | "cancelled";
@@ -27,6 +29,8 @@ export interface Database {
           product_category?: string | null;
           quantity: number;
           unit_price: number;
+          payment_method?: "cash" | "pix" | "debit_card" | "credit_card";
+          installments?: number | null;
           customer_name?: string | null;
           order_code?: string | null;
           status: "pending" | "paid" | "completed" | "cancelled";
@@ -39,6 +43,8 @@ export interface Database {
           product_category?: string | null;
           quantity?: number;
           unit_price?: number;
+          payment_method?: "cash" | "pix" | "debit_card" | "credit_card";
+          installments?: number | null;
           customer_name?: string | null;
           order_code?: string | null;
           status?: "pending" | "paid" | "completed" | "cancelled";

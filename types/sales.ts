@@ -1,10 +1,11 @@
-import { FILTER_PERIODS, SALE_STATUSES } from "@/lib/constants";
+import { FILTER_PERIODS, PAYMENT_METHODS, SALE_STATUSES } from "@/lib/constants";
 import type { Database } from "@/types/database";
 
 export type SaleRecord = Database["public"]["Tables"]["sales"]["Row"];
 export type SaleInsert = Database["public"]["Tables"]["sales"]["Insert"];
 export type SaleUpdate = Database["public"]["Tables"]["sales"]["Update"];
 export type SaleStatus = (typeof SALE_STATUSES)[number];
+export type PaymentMethod = (typeof PAYMENT_METHODS)[number];
 export type FilterPeriod = (typeof FILTER_PERIODS)[number];
 
 export interface SalesFilters {

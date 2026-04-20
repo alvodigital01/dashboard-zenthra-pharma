@@ -13,21 +13,49 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  CREDIT_CARD_MAX_INSTALLMENTS,
+  PAYMENT_METHOD_LABELS,
+  PAYMENT_METHODS
+} from "@/lib/constants";
 import { createBrowserSupabaseClient } from "@/lib/supabase/browser";
-import { formatCurrencyBRL, formatNumber } from "@/lib/utils";
-import type { SaleInsert, SaleRecord, SaleStatus, SaleUpdate } from "@/types/sales";
+import { formatCurrencyBRL, formatNumber, formatPaymentDetails } from "@/lib/utils";
+import type {
+  PaymentMethod,
+  SaleInsert,
+  SaleRecord,
+  SaleStatus,
+  SaleUpdate
+} from "@/types/sales";
 
-const saleSchema = z.object({
-  saleDate: z.string().min(1, "A data da venda é obrigatória."),
-  productName: z.string().min(1, "O produto é obrigatório."),
-  productCategory: z.string().optional(),
-  quantity: z.coerce.number().int().positive("A quantidade deve ser maior que zero."),
-  unitPrice: z.coerce.number().positive("O valor unitário deve ser maior que zero."),
-  customerName: z.string().optional(),
-  orderCode: z.string().optional(),
-  status: z.enum(["pending", "paid", "completed", "cancelled"]),
-  notes: z.string().optional()
-});
+const saleSchema = z
+  .object({
+    saleDate: z.string().min(1, "A data da venda é obrigatória."),
+    productName: z.string().min(1, "O produto é obrigatório."),
+    productCategory: z.string().optional(),
+    quantity: z.coerce.number().int().positive("A quantidade deve ser maior que zero."),
+    unitPrice: z.coerce.number().positive("O valor unitário deve ser maior que zero."),
+    paymentMethod: z.enum(PAYMENT_METHODS),
+    installments: z.coerce
+      .number()
+      .int()
+      .min(1, "Escolha pelo menos 1 parcela.")
+      .max(CREDIT_CARD_MAX_INSTALLMENTS, `Parcelamento limitado a ${CREDIT_CARD_MAX_INSTALLMENTS}x.`)
+      .optional(),
+    customerName: z.string().optional(),
+    orderCode: z.string().optional(),
+    status: z.enum(["pending", "paid", "completed", "cancelled"]),
+    notes: z.string().optional()
+  })
+  .superRefine((values, ctx) => {
+    if (values.paymentMethod === "credit_card" && !values.installments) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["installments"],
+        message: "Selecione o parcelamento do cartão."
+      });
+    }
+  });
 
 type SaleFormValues = z.infer<typeof saleSchema>;
 
@@ -46,8 +74,16 @@ function mapSalesError(message: string) {
     return "Não foi possível vincular a venda ao usuário atual. Entre novamente e tente de novo.";
   }
 
+  if (
+    normalized.includes("payment_method") ||
+    normalized.includes("installments") ||
+    normalized.includes("schema cache")
+  ) {
+    return "O banco ainda não foi atualizado para forma de pagamento e parcelamento. Execute o SQL novo no Supabase e tente novamente.";
+  }
+
   if (normalized.includes("violates check constraint")) {
-    return "Revise quantidade, valor unitário e status antes de salvar.";
+    return "Revise quantidade, valor unitário, status e parcelamento antes de salvar.";
   }
 
   return "Não foi possível salvar a venda agora. Tente novamente.";
@@ -81,6 +117,8 @@ export function SalesForm({
       productCategory: initialData?.product_category ?? "",
       quantity: initialData?.quantity ?? 1,
       unitPrice: Number(initialData?.unit_price ?? 0),
+      paymentMethod: initialData?.payment_method ?? "pix",
+      installments: initialData?.installments ?? 1,
       customerName: initialData?.customer_name ?? "",
       orderCode: initialData?.order_code ?? "",
       status: initialData?.status ?? "pending",
@@ -90,6 +128,9 @@ export function SalesForm({
 
   const quantity = watch("quantity");
   const unitPrice = watch("unitPrice");
+  const paymentMethod = watch("paymentMethod");
+  const installments = watch("installments");
+  const currentStatus = watch("status");
   const totalPrice = (Number(quantity) || 0) * (Number(unitPrice) || 0);
 
   const onSubmit = async (values: SaleFormValues) => {
@@ -113,6 +154,8 @@ export function SalesForm({
       product_category: sanitizeOptional(values.productCategory),
       quantity: values.quantity,
       unit_price: values.unitPrice,
+      payment_method: values.paymentMethod as PaymentMethod,
+      installments: values.paymentMethod === "credit_card" ? values.installments ?? 1 : null,
       customer_name: sanitizeOptional(values.customerName),
       order_code: sanitizeOptional(values.orderCode),
       status: values.status as SaleStatus,
@@ -176,6 +219,7 @@ export function SalesForm({
                 </p>
                 <p className="text-sm text-muted-foreground">Preencha os dados principais da venda.</p>
               </div>
+
               <div className="grid gap-5 lg:grid-cols-2">
                 <div className="space-y-2">
                   <label
@@ -257,6 +301,47 @@ export function SalesForm({
                     <p className="text-sm text-danger">{errors.unitPrice.message}</p>
                   ) : null}
                 </div>
+
+                <div className="space-y-2">
+                  <label
+                    htmlFor="paymentMethod"
+                    className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-slate-500"
+                  >
+                    Forma de pagamento
+                  </label>
+                  <Select id="paymentMethod" {...register("paymentMethod")}>
+                    {PAYMENT_METHODS.map((method) => (
+                      <option key={method} value={method}>
+                        {PAYMENT_METHOD_LABELS[method]}
+                      </option>
+                    ))}
+                  </Select>
+                </div>
+
+                {paymentMethod === "credit_card" ? (
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="installments"
+                      className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-slate-500"
+                    >
+                      Parcelamento
+                    </label>
+                    <Select id="installments" {...register("installments")}>
+                      {Array.from({ length: CREDIT_CARD_MAX_INSTALLMENTS }, (_, index) => {
+                        const currentInstallment = index + 1;
+
+                        return (
+                          <option key={currentInstallment} value={currentInstallment}>
+                            {currentInstallment}x
+                          </option>
+                        );
+                      })}
+                    </Select>
+                    {errors.installments ? (
+                      <p className="text-sm text-danger">{errors.installments.message}</p>
+                    ) : null}
+                  </div>
+                ) : null}
               </div>
             </div>
 
@@ -269,6 +354,7 @@ export function SalesForm({
                   Campos opcionais para cliente, pedido e observações.
                 </p>
               </div>
+
               <div className="grid gap-5 lg:grid-cols-2">
                 <div className="space-y-2">
                   <label
@@ -318,15 +404,27 @@ export function SalesForm({
               <p className="mt-6 font-display text-[3.2rem] leading-none">
                 {formatCurrencyBRL(totalPrice)}
               </p>
+
               <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
                 <div className="rounded-[24px] bg-white/[0.08] p-4">
                   <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Quantidade</p>
                   <p className="mt-2 text-xl font-semibold">{formatNumber(Number(quantity) || 0)}</p>
                 </div>
+
+                <div className="rounded-[24px] bg-white/[0.08] p-4">
+                  <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Pagamento</p>
+                  <p className="mt-2 text-xl font-semibold">
+                    {formatPaymentDetails(
+                      paymentMethod as PaymentMethod,
+                      paymentMethod === "credit_card" ? Number(installments) || 1 : null
+                    )}
+                  </p>
+                </div>
+
                 <div className="rounded-[24px] bg-white/[0.08] p-4">
                   <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Status atual</p>
                   <p className="mt-2 text-xl font-semibold">
-                    {saleStatusLabels[watch("status") as SaleStatus] ?? "Pendente"}
+                    {saleStatusLabels[currentStatus as SaleStatus] ?? "Pendente"}
                   </p>
                 </div>
               </div>
@@ -339,6 +437,7 @@ export function SalesForm({
               <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-600">
                 <li>Quantidade precisa ser maior que zero.</li>
                 <li>Valor unitário precisa ser maior que zero.</li>
+                <li>Cartão de crédito permite parcelamento de 1x até 5x.</li>
                 <li>Somente vendas pagas e concluídas entram nos indicadores.</li>
               </ul>
             </div>
