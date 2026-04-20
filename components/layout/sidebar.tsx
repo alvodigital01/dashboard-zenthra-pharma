@@ -73,9 +73,6 @@ export function Sidebar({
                 <p className="text-xl font-semibold tracking-[-0.04em] text-white md:text-2xl">
                   Painel executivo
                 </p>
-                <p className="text-sm leading-6 text-slate-300 md:leading-7">
-                  Visão clara da operação comercial.
-                </p>
               </div>
             </div>
 
