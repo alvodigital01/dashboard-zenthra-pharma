@@ -18,7 +18,12 @@ const display = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   title: APP_NAME,
-  description: "Dashboard comercial com controle de vendas, faturamento e relatórios."
+  description: "Dashboard comercial com controle de vendas, faturamento e relatorios.",
+  icons: {
+    icon: "/brand-logo.png",
+    shortcut: "/brand-logo.png",
+    apple: "/brand-logo.png"
+  }
 };
 
 export default function RootLayout({
