@@ -129,7 +129,7 @@ export function LoginForm() {
       </Button>
 
       <p className="text-center text-sm leading-6 text-slate-500">
-        Acesse vendas, indicadores e relatórios.
+        Acesse bancos, espumas, vendas, indicadores e relatórios.
       </p>
     </form>
   );

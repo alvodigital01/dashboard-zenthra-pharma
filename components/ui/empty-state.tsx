@@ -12,7 +12,7 @@ export function EmptyState({
   icon: LucideIcon;
 }) {
   return (
-    <Card className="border-dashed border-[rgba(16,46,94,0.12)] bg-white/[0.88]">
+    <Card className="border-dashed border-[rgba(138,105,47,0.18)] bg-white/[0.88]">
       <CardContent className="flex min-h-[260px] flex-col items-center justify-center text-center">
         <div className="rounded-[26px] bg-[linear-gradient(180deg,rgba(243,247,251,1),rgba(233,239,247,1))] p-5 text-primary shadow-soft">
           <Icon className="h-6 w-6" />

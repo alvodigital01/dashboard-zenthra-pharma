@@ -12,7 +12,7 @@ const statusMap: Record<SaleStatus, { label: string; className: string }> = {
   },
   completed: {
     label: "Concluído",
-    className: "bg-sky-50/90 text-sky-700 ring-sky-100"
+    className: "bg-amber-50/90 text-amber-800 ring-amber-100"
   },
   cancelled: {
     label: "Cancelado",

@@ -22,5 +22,5 @@ export default async function DashboardLayout({
     redirect("/login");
   }
 
-  return <AppShell userEmail={user.email ?? "usuario@zenthra.local"}>{children}</AppShell>;
+  return <AppShell userEmail={user.email ?? "usuario@rochacustom.local"}>{children}</AppShell>;
 }

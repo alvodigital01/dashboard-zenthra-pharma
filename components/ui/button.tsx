@@ -22,13 +22,13 @@ export function buttonVariants({
   return cn(
     "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-[0.01em] transition-all duration-200 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60",
     variant === "primary" &&
-      "bg-[linear-gradient(135deg,rgba(13,33,74,1),rgba(18,61,122,1))] text-primary-foreground shadow-float hover:-translate-y-0.5 hover:brightness-[1.03]",
+      "bg-[linear-gradient(135deg,#e0bf79,#b98736)] text-[#15130f] shadow-float hover:-translate-y-0.5 hover:brightness-[1.04]",
     variant === "secondary" &&
-      "bg-[linear-gradient(180deg,rgba(244,247,251,1),rgba(236,241,247,1))] text-slate-700 shadow-soft hover:bg-slate-100",
+      "bg-[linear-gradient(180deg,#faf7f0,#eee7da)] text-[#4f473c] shadow-soft hover:bg-[#f2ebdf]",
     variant === "outline" &&
-      "border border-[rgba(18,47,99,0.12)] bg-white/[0.86] text-slate-700 shadow-soft backdrop-blur hover:border-[rgba(18,47,99,0.22)] hover:bg-white",
+      "border border-[rgba(138,105,47,0.2)] bg-[#fffdf8]/[0.9] text-[#51493e] shadow-soft backdrop-blur hover:border-[rgba(138,105,47,0.38)] hover:bg-[#fffdf8]",
     variant === "ghost" &&
-      "text-slate-600 hover:bg-[rgba(18,47,99,0.05)] hover:text-slate-900",
+      "text-slate-600 hover:bg-[rgba(138,105,47,0.08)] hover:text-slate-900",
     variant === "danger" &&
       "bg-[linear-gradient(135deg,rgba(173,35,35,1),rgba(210,66,66,1))] text-white shadow-soft hover:brightness-[1.03]",
     size === "sm" && "h-10 px-4 text-sm",

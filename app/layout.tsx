@@ -1,28 +1,23 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import { Manrope } from "next/font/google";
 import { Toaster } from "sonner";
 
 import "@/app/globals.css";
 import { APP_NAME } from "@/lib/constants";
+import rochaLogo from "@/logorochacustombancos.jpeg";
 
 const sans = Manrope({
   subsets: ["latin"],
   variable: "--font-sans"
 });
 
-const display = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-display"
-});
-
 export const metadata: Metadata = {
   title: APP_NAME,
-  description: "Dashboard comercial com controle de vendas, faturamento e relatorios.",
+  description: "Dashboard comercial da Rocha Custom Bancos para vendas de bancos e espumas.",
   icons: {
-    icon: "/brand-logo.png",
-    shortcut: "/brand-logo.png",
-    apple: "/brand-logo.png"
+    icon: rochaLogo.src,
+    shortcut: rochaLogo.src,
+    apple: rochaLogo.src
   }
 };
 
@@ -33,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${sans.variable} ${display.variable}`}>
+      <body className={sans.variable}>
         {children}
         <Toaster position="top-right" richColors />
       </body>

@@ -17,8 +17,8 @@ export function SalesBarChart({
   if (!hasData) {
     return (
       <EmptyState
-        title="Sem vendas válidas na semana"
-        description="Assim que houver vendas pagas ou concluídas, o gráfico semanal aparecerá aqui."
+        title="Sem itens vendidos na semana"
+        description="Assim que houver bancos ou espumas pagos ou concluídos, o gráfico semanal aparecerá aqui."
         icon={BarChart3}
       />
     );
@@ -28,26 +28,26 @@ export function SalesBarChart({
     <Card className="brand-shell brand-frost h-full overflow-hidden">
       <CardHeader>
         <CardDescription>Semana atual</CardDescription>
-        <CardTitle>Vendas por dia</CardTitle>
+        <CardTitle>Itens vendidos por dia</CardTitle>
       </CardHeader>
       <CardContent className="h-[300px] pt-0 sm:h-[340px] xl:h-[360px]">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ left: -12, right: 8, top: 8 }}>
-            <CartesianGrid strokeDasharray="4 6" vertical={false} stroke="#dbe4f0" />
+            <CartesianGrid strokeDasharray="4 6" vertical={false} stroke="#e4ddd2" />
             <XAxis
               dataKey="label"
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "#64748b", fontSize: 12 }}
+              tick={{ fill: "#756b5d", fontSize: 12 }}
             />
-            <YAxis axisLine={false} tickLine={false} tick={{ fill: "#64748b", fontSize: 12 }} />
+            <YAxis axisLine={false} tickLine={false} tick={{ fill: "#756b5d", fontSize: 12 }} />
             <Tooltip
               cursor={{ fill: "rgba(15, 23, 42, 0.03)" }}
               contentStyle={{
                 borderRadius: 20,
-                borderColor: "rgba(16,46,94,0.08)",
+                borderColor: "rgba(138,105,47,0.14)",
                 boxShadow: "0 20px 45px -28px rgba(15, 23, 42, 0.28)",
-                backgroundColor: "rgba(255,255,255,0.96)"
+                backgroundColor: "rgba(255,253,248,0.97)"
               }}
               formatter={(value: number, name: string) => {
                 if (name === "Quantidade") {
@@ -57,7 +57,7 @@ export function SalesBarChart({
                 return [formatCurrencyBRL(value), name];
               }}
             />
-            <Bar dataKey="quantity" name="Quantidade" radius={[14, 14, 6, 6]} fill="#123b77" />
+            <Bar dataKey="quantity" name="Quantidade" radius={[14, 14, 6, 6]} fill="#c7a662" />
           </BarChart>
         </ResponsiveContainer>
       </CardContent>

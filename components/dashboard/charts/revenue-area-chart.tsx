@@ -47,31 +47,31 @@ export function RevenueAreaChart({
           <AreaChart data={data} margin={{ left: -12, right: 8, top: 8 }}>
             <defs>
               <linearGradient id="revenueGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#1f5aa6" stopOpacity={0.24} />
-                <stop offset="95%" stopColor="#0891b2" stopOpacity={0} />
+                <stop offset="5%" stopColor="#c7a662" stopOpacity={0.3} />
+                <stop offset="95%" stopColor="#c52f30" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="4 6" vertical={false} stroke="#dbe4f0" />
+            <CartesianGrid strokeDasharray="4 6" vertical={false} stroke="#e4ddd2" />
             <XAxis
               dataKey="label"
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "#64748b", fontSize: 12 }}
+              tick={{ fill: "#756b5d", fontSize: 12 }}
             />
-            <YAxis axisLine={false} tickLine={false} tick={{ fill: "#64748b", fontSize: 12 }} />
+            <YAxis axisLine={false} tickLine={false} tick={{ fill: "#756b5d", fontSize: 12 }} />
             <Tooltip
               contentStyle={{
                 borderRadius: 20,
-                borderColor: "rgba(16,46,94,0.08)",
+                borderColor: "rgba(138,105,47,0.14)",
                 boxShadow: "0 20px 45px -28px rgba(15, 23, 42, 0.28)",
-                backgroundColor: "rgba(255,255,255,0.96)"
+                backgroundColor: "rgba(255,253,248,0.97)"
               }}
               formatter={(value: number) => [formatCurrencyBRL(value), "Faturamento"]}
             />
             <Area
               type="monotone"
               dataKey="revenue"
-              stroke="#1f5aa6"
+              stroke="#b4873b"
               strokeWidth={3}
               fill="url(#revenueGradient)"
             />

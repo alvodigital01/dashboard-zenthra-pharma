@@ -15,8 +15,8 @@ export function TopProductsChart({
   if (!data.length) {
     return (
       <EmptyState
-        title="Sem ranking de produtos"
-        description="Os produtos mais vendidos aparecem aqui quando houver vendas válidas no mês."
+        title="Sem ranking de bancos e espumas"
+        description="Os bancos e espumas mais vendidos aparecem aqui quando houver vendas válidas no mês."
         icon={BarChart3}
       />
     );
@@ -26,17 +26,17 @@ export function TopProductsChart({
     <Card className="brand-shell brand-frost h-full overflow-hidden">
       <CardHeader>
         <CardDescription>Mês atual</CardDescription>
-        <CardTitle>Produtos mais vendidos</CardTitle>
+        <CardTitle>Bancos e espumas mais vendidos</CardTitle>
       </CardHeader>
       <CardContent className="h-[300px] pt-0 sm:h-[340px] xl:h-[360px]">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} layout="vertical" margin={{ left: 0, right: 8, top: 8 }}>
-            <CartesianGrid strokeDasharray="4 6" horizontal={false} stroke="#dbe4f0" />
+            <CartesianGrid strokeDasharray="4 6" horizontal={false} stroke="#e4ddd2" />
             <XAxis
               type="number"
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "#64748b", fontSize: 12 }}
+              tick={{ fill: "#756b5d", fontSize: 12 }}
             />
             <YAxis
               type="category"
@@ -44,18 +44,18 @@ export function TopProductsChart({
               axisLine={false}
               tickLine={false}
               width={108}
-              tick={{ fill: "#475569", fontSize: 12 }}
+              tick={{ fill: "#5f574d", fontSize: 12 }}
             />
             <Tooltip
               formatter={(value: number) => [formatNumber(value), "Quantidade"]}
               contentStyle={{
                 borderRadius: 20,
-                borderColor: "rgba(16,46,94,0.08)",
+                borderColor: "rgba(138,105,47,0.14)",
                 boxShadow: "0 20px 45px -28px rgba(15, 23, 42, 0.28)",
-                backgroundColor: "rgba(255,255,255,0.96)"
+                backgroundColor: "rgba(255,253,248,0.97)"
               }}
             />
-            <Bar dataKey="quantity" radius={[0, 14, 14, 0]} fill="#123b77" />
+            <Bar dataKey="quantity" radius={[0, 14, 14, 0]} fill="#c7a662" />
           </BarChart>
         </ResponsiveContainer>
       </CardContent>

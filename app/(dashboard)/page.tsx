@@ -26,28 +26,35 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-5 md:space-y-6">
-      <div className="grid gap-5 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)] xl:items-stretch">
-        <section className="relative overflow-hidden rounded-[28px] bg-brand-veil px-5 py-6 text-white shadow-float md:rounded-[36px] md:px-8 md:py-8">
+      <div className="grid min-w-0 grid-cols-1 gap-5 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)] xl:items-stretch">
+        <section className="brand-dark-panel relative overflow-hidden rounded-[28px] px-5 py-6 text-white shadow-float md:rounded-[36px] md:px-8 md:py-8">
           <div className="absolute inset-0">
             <div className="absolute right-[-44px] top-[-48px] h-60 w-60 rounded-[42%] border border-white/10" />
-            <div className="absolute bottom-[-72px] left-[-40px] h-72 w-72 rounded-[45%] bg-[radial-gradient(circle_at_center,rgba(47,107,188,0.28),transparent_64%)]" />
+            <div className="absolute bottom-[-72px] left-[-40px] h-72 w-72 rounded-[45%] bg-[radial-gradient(circle_at_center,rgba(197,47,48,0.22),transparent_64%)]" />
             <div className="absolute left-[32%] top-[18%] h-48 w-48 rounded-[38%] border border-white/[0.08]" />
+            <div className="absolute -left-10 top-[52%] h-1 w-64 -rotate-12 bg-[linear-gradient(90deg,transparent,rgba(197,47,48,0.8),transparent)]" />
           </div>
 
           <div className="relative z-10">
-            <h1 className="max-w-[9ch] font-display text-[clamp(2.5rem,9vw,4.8rem)] leading-[0.92] text-white">
-              Dashboard comercial
+            <p className="mb-4 text-[0.68rem] font-semibold uppercase tracking-[0.26em] text-[#e0bf79]">
+              Rocha Custom Bancos
+            </p>
+            <h1 className="max-w-[13ch] font-display text-[clamp(2.35rem,8vw,4.5rem)] font-extrabold leading-[0.95] tracking-[-0.055em] text-white">
+              Bancos & espumas
             </h1>
+            <p className="mt-4 max-w-xl text-sm leading-6 text-slate-300 md:text-base md:leading-7">
+              Visão comercial dos bancos personalizados e espumas vendidos pela oficina.
+            </p>
 
             <div className="mt-7 grid gap-3 sm:grid-cols-3 md:mt-8 md:gap-4">
               <div className="min-w-0 rounded-[24px] border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm md:rounded-[28px] md:p-5">
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-slate-400">
-                  Semana
+                  Itens vendidos
                 </p>
                 <p className="mt-3 break-words text-[clamp(1.65rem,2.4vw,2.4rem)] font-semibold tracking-[-0.05em] text-white">
                   {formatNumber(data.week.totalQuantity)}
                 </p>
-                <p className="mt-2 text-sm text-slate-300">Válidos na semana.</p>
+                <p className="mt-2 text-sm text-slate-300">Bancos e espumas na semana.</p>
               </div>
               <div className="min-w-0 rounded-[24px] border border-white/10 bg-white/[0.06] p-4 backdrop-blur-sm md:rounded-[28px] md:p-5">
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-slate-400">
@@ -100,13 +107,13 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent className="space-y-4 pt-0">
             <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
-              <div className="rounded-[20px] border border-[rgba(16,46,94,0.08)] bg-slate-50/80 p-4 md:rounded-[24px]">
+              <div className="rounded-[20px] border border-[rgba(138,105,47,0.12)] bg-[#faf7f0]/80 p-4 md:rounded-[24px]">
                 <p className="text-xs uppercase tracking-[0.18em] text-slate-500">Vendas da semana</p>
                 <p className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-slate-950">
                   {formatNumber(data.week.salesCount)}
                 </p>
               </div>
-              <div className="rounded-[20px] border border-[rgba(16,46,94,0.08)] bg-slate-50/80 p-4 md:rounded-[24px]">
+              <div className="rounded-[20px] border border-[rgba(138,105,47,0.12)] bg-[#faf7f0]/80 p-4 md:rounded-[24px]">
                 <p className="text-xs uppercase tracking-[0.18em] text-slate-500">Vendas do mês</p>
                 <p className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-slate-950">
                   {formatNumber(data.month.salesCount)}
@@ -114,9 +121,9 @@ export default async function DashboardPage() {
               </div>
             </div>
 
-            <div className="rounded-[22px] bg-[linear-gradient(135deg,rgba(14,43,91,0.96),rgba(23,77,143,0.96))] p-5 text-white shadow-soft md:rounded-[26px]">
-              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-cyan-100">
-                Produto em destaque
+            <div className="rounded-[22px] bg-[radial-gradient(circle_at_top_right,rgba(199,166,98,0.22),transparent_35%),linear-gradient(135deg,#202020,#101010)] p-5 text-white shadow-soft md:rounded-[26px]">
+              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[#e0bf79]">
+                Banco ou espuma em destaque
               </p>
               <p className="mt-3 text-xl font-semibold tracking-[-0.04em] md:text-2xl">
                 {topProduct?.productName ?? "Sem dados suficientes"}
@@ -128,7 +135,7 @@ export default async function DashboardPage() {
               </p>
             </div>
 
-            <div className="rounded-[20px] border border-[rgba(16,46,94,0.08)] bg-white/90 p-4 md:rounded-[24px]">
+            <div className="rounded-[20px] border border-[rgba(138,105,47,0.12)] bg-white/90 p-4 md:rounded-[24px]">
               <div className="flex items-center gap-3">
                 <div className="rounded-2xl bg-primary/[0.08] p-3 text-primary">
                   <PackageSearch className="h-5 w-5" />
@@ -136,7 +143,7 @@ export default async function DashboardPage() {
                 <div>
                   <p className="text-sm font-semibold text-slate-950">Leitura rápida</p>
                   <p className="text-sm leading-6 text-muted-foreground">
-                    Volume, receita e produtos em destaque.
+                    Volume, receita, bancos e espumas em destaque.
                   </p>
                 </div>
               </div>
@@ -156,15 +163,15 @@ export default async function DashboardPage() {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <MetricCard
-            title="Produtos vendidos"
+            title="Bancos e espumas vendidos"
             value={formatNumber(data.week.totalQuantity)}
-            description="Vendas pagas e concluídas da semana."
+            description="Itens pagos e concluídos da semana."
             icon={Box}
           />
           <MetricCard
             title="Vendas registradas"
             value={formatNumber(data.week.salesCount)}
-            description="Registros válidos da semana."
+            description="Todos os registros da semana."
             icon={ReceiptText}
             tone="accent"
           />
@@ -195,15 +202,15 @@ export default async function DashboardPage() {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <MetricCard
-            title="Produtos vendidos"
+            title="Bancos e espumas vendidos"
             value={formatNumber(data.month.totalQuantity)}
-            description="Volume válido do mês."
+            description="Itens pagos e concluídos no mês."
             icon={CalendarRange}
           />
           <MetricCard
             title="Vendas registradas"
             value={formatNumber(data.month.salesCount)}
-            description="Registros válidos do mês."
+            description="Todos os registros do mês."
             icon={ReceiptText}
             tone="accent"
           />
@@ -223,7 +230,7 @@ export default async function DashboardPage() {
         </div>
       </section>
 
-      <div className="grid gap-4 xl:grid-cols-[1.05fr_0.95fr] xl:gap-5">
+      <div className="grid min-w-0 grid-cols-1 gap-4 xl:grid-cols-[1.05fr_0.95fr] xl:gap-5">
         <SalesBarChart data={data.dailyWeekSales} />
         <RevenueAreaChart
           data={data.revenueTrend}
@@ -232,7 +239,7 @@ export default async function DashboardPage() {
         />
       </div>
 
-      <div className="grid gap-4 xl:grid-cols-[0.82fr_1.18fr] xl:gap-5">
+      <div className="grid min-w-0 grid-cols-1 gap-4 xl:grid-cols-[0.82fr_1.18fr] xl:gap-5">
         <TopProductsChart
           data={data.topProducts.map((product) => ({
             productName: product.productName,

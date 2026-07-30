@@ -31,7 +31,7 @@ export function RecentSalesTable({ sales }: { sales: SaleRecord[] }) {
               {sales.map((sale) => (
                 <div
                   key={sale.id}
-                  className="rounded-[20px] border border-[rgba(16,46,94,0.08)] bg-white/80 p-4"
+                  className="rounded-[20px] border border-[rgba(138,105,47,0.12)] bg-white/80 p-4"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
@@ -69,13 +69,13 @@ export function RecentSalesTable({ sales }: { sales: SaleRecord[] }) {
               ))}
             </div>
 
-            <div className="hidden overflow-hidden rounded-[22px] border border-[rgba(16,46,94,0.08)] md:block md:rounded-[26px]">
+            <div className="hidden overflow-hidden rounded-[22px] border border-[rgba(138,105,47,0.12)] md:block md:rounded-[26px]">
               <div className="overflow-x-auto">
                 <table className="min-w-[680px] w-full text-left text-sm">
                   <thead className="bg-slate-50/80 text-xs uppercase tracking-[0.14em] text-muted-foreground">
                     <tr>
                       <th className="px-5 py-4 font-medium">Data</th>
-                      <th className="px-5 py-4 font-medium">Produto</th>
+                      <th className="px-5 py-4 font-medium">Banco / espuma</th>
                       <th className="px-5 py-4 font-medium">Status</th>
                       <th className="px-5 py-4 font-medium">Quantidade</th>
                       <th className="px-5 py-4 text-right font-medium">Total</th>

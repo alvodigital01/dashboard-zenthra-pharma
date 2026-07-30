@@ -1,6 +1,6 @@
-# Zenthra Pharma Sales Dashboard
+# Rocha Custom Bancos Dashboard
 
-Sistema web completo de dashboard comercial e controle de vendas para operacoes farmaceuticas, construido com:
+Sistema web de dashboard comercial e controle de vendas de bancos personalizados e espumas, construido com:
 
 - Next.js 14 com App Router
 - TypeScript
@@ -15,7 +15,7 @@ Sistema web completo de dashboard comercial e controle de vendas para operacoes 
 - Dashboard principal com metricas semanais e mensais
 - Calculo automatico de bonus por performance
 - CRUD completo de vendas
-- Filtros por periodo, produto, status e busca textual
+- Filtros por periodo, banco ou espuma, status e busca textual
 - Relatorios com agrupamento semanal e mensal
 - Exportacao CSV do conjunto filtrado
 - Estrutura pronta para evolucao futura para multiplos usuarios
@@ -54,7 +54,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 3. No painel do Supabase:
    - habilite Email/Password em `Authentication > Providers`
    - crie ao menos um usuario autenticado
-4. Execute o SQL de [supabase/schema.sql](/d:/ESTUDOS/dashboard-zenthra-pharma/supabase/schema.sql:1) no SQL Editor do Supabase.
+4. Execute o arquivo `supabase/schema.sql` no SQL Editor do Supabase.
 5. Se o projeto ja estiver rodando, execute novamente o mesmo SQL para adicionar `payment_method` e `installments` na tabela `sales`.
 
 ## Rodando localmente
