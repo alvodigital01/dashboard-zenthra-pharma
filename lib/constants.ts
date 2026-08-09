@@ -5,6 +5,15 @@ export const VALID_CALCULATION_STATUSES = ["paid", "completed"] as const;
 export const SALE_STATUSES = ["pending", "paid", "completed", "cancelled"] as const;
 export const PAYMENT_METHODS = ["cash", "pix", "debit_card", "credit_card"] as const;
 export const CREDIT_CARD_MAX_INSTALLMENTS = 5;
+export const EXPENSE_CATEGORIES = [
+  "Matéria-prima",
+  "Fixo",
+  "Variável",
+  "Marketing",
+  "Impostos",
+  "Manutenção",
+  "Outros"
+] as const;
 export const FILTER_PERIODS = [
   "all",
   "today",
@@ -37,5 +46,13 @@ export const PAGE_TITLES: Record<string, { title: string; description: string }>
   "/reports": {
     title: "Relatórios",
     description: "Resumo por período, semana e mês."
+  },
+  "/expenses": {
+    title: "Gastos",
+    description: "Cadastre, filtre e acompanhe os gastos da oficina."
+  },
+  "/expenses/new": {
+    title: "Novo gasto",
+    description: "Registre um gasto para acompanhar o lucro real."
   }
 };

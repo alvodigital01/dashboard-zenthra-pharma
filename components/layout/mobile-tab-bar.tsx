@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart3, FileBarChart2, LayoutDashboard, Plus } from "lucide-react";
+import { BarChart3, FileBarChart2, LayoutDashboard, Plus, Wallet } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -10,6 +10,7 @@ const items = [
   { href: "/", label: "Início", icon: LayoutDashboard },
   { href: "/sales", label: "Vendas", icon: BarChart3 },
   { href: "/sales/new", label: "Nova", icon: Plus, highlight: true },
+  { href: "/expenses", label: "Gastos", icon: Wallet },
   { href: "/reports", label: "Relatórios", icon: FileBarChart2 }
 ];
 
@@ -30,7 +31,7 @@ export function MobileTabBar() {
 
   return (
     <nav className="fixed inset-x-3 bottom-3 z-30 md:hidden">
-      <div className="glass-panel grid grid-cols-4 items-center gap-1 rounded-[28px] border border-white/80 px-2 py-2 shadow-panel">
+      <div className="glass-panel grid grid-cols-5 items-center gap-1 rounded-[28px] border border-white/80 px-2 py-2 shadow-panel">
         {items.map((item) => {
           const Icon = item.icon;
           const active = isActivePath(pathname, item.href);

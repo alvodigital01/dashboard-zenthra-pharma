@@ -54,6 +54,46 @@ export interface Database {
         };
         Relationships: [];
       };
+      expenses: {
+        Row: {
+          id: string;
+          created_at: string;
+          updated_at: string;
+          expense_date: string;
+          description: string;
+          category: string | null;
+          amount: number;
+          payment_method: "cash" | "pix" | "debit_card" | "credit_card";
+          installments: number | null;
+          notes: string | null;
+          user_id: string;
+        };
+        Insert: {
+          id?: string;
+          created_at?: string;
+          updated_at?: string;
+          expense_date: string;
+          description: string;
+          category?: string | null;
+          amount: number;
+          payment_method?: "cash" | "pix" | "debit_card" | "credit_card";
+          installments?: number | null;
+          notes?: string | null;
+          user_id?: string;
+        };
+        Update: {
+          expense_date?: string;
+          description?: string;
+          category?: string | null;
+          amount?: number;
+          payment_method?: "cash" | "pix" | "debit_card" | "credit_card";
+          installments?: number | null;
+          notes?: string | null;
+          user_id?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;

@@ -4,7 +4,9 @@ import {
   CalendarRange,
   CircleDollarSign,
   PackageSearch,
-  ReceiptText
+  ReceiptText,
+  Scale,
+  Wallet
 } from "lucide-react";
 import Link from "next/link";
 
@@ -18,11 +20,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { formatCurrencyBRL, formatNumber } from "@/lib/utils";
 import { getDashboardData } from "@/services/sales";
+import { getDashboardExpenses } from "@/services/expenses";
 
 export default async function DashboardPage() {
   const supabase = createServerSupabaseClient();
-  const data = await getDashboardData(supabase);
+  const [data, expenses] = await Promise.all([
+    getDashboardData(supabase),
+    getDashboardExpenses(supabase)
+  ]);
   const topProduct = data.topProducts[0];
+  const weekProfit = data.week.totalRevenue - expenses.week.totalAmount;
+  const monthProfit = data.month.totalRevenue - expenses.month.totalAmount;
 
   return (
     <div className="space-y-5 md:space-y-6">
@@ -227,6 +235,69 @@ export default async function DashboardPage() {
             icon={CircleDollarSign}
             tone="success"
           />
+        </div>
+      </section>
+
+      <section className="space-y-4">
+        <div className="space-y-1">
+          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-500">
+            Faturamento x gastos
+          </p>
+          <h2 className="text-2xl font-semibold tracking-[-0.03em] text-slate-950">
+            Lucro real
+          </h2>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Semana atual</p>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <MetricCard
+              title="Faturamento"
+              value={formatCurrencyBRL(data.week.totalRevenue)}
+              description="Receita válida da semana."
+              icon={BriefcaseBusiness}
+            />
+            <MetricCard
+              title="Gastos"
+              value={formatCurrencyBRL(expenses.week.totalAmount)}
+              description="Total gasto na semana."
+              icon={Wallet}
+              tone="accent"
+            />
+            <MetricCard
+              title="Lucro real"
+              value={formatCurrencyBRL(weekProfit)}
+              description="Faturamento menos gastos da semana."
+              icon={Scale}
+              tone={weekProfit >= 0 ? "success" : "accent"}
+            />
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Mês atual</p>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <MetricCard
+              title="Faturamento do mês"
+              value={formatCurrencyBRL(data.month.totalRevenue)}
+              description="Receita válida do mês."
+              icon={BriefcaseBusiness}
+            />
+            <MetricCard
+              title="Gastos do mês"
+              value={formatCurrencyBRL(expenses.month.totalAmount)}
+              description="Total gasto no mês."
+              icon={Wallet}
+              tone="accent"
+            />
+            <MetricCard
+              title="Lucro real do mês"
+              value={formatCurrencyBRL(monthProfit)}
+              description="Faturamento menos gastos do mês."
+              icon={Scale}
+              tone={monthProfit >= 0 ? "success" : "accent"}
+            />
+          </div>
         </div>
       </section>
 

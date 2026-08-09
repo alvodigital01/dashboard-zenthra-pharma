@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, BarChart3, FileBarChart2, LayoutDashboard, PlusCircle, X } from "lucide-react";
+import { ArrowUpRight, BarChart3, FileBarChart2, LayoutDashboard, PlusCircle, Wallet, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 const navigationItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
   { href: "/sales", label: "Vendas", icon: BarChart3 },
+  { href: "/expenses", label: "Gastos", icon: Wallet },
   { href: "/reports", label: "Relatórios", icon: FileBarChart2 }
 ];
 

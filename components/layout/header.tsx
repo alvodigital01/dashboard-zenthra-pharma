@@ -20,6 +20,17 @@ function resolvePageMeta(pathname: string) {
     return PAGE_TITLES["/sales/new"];
   }
 
+  if (pathname.startsWith("/expenses/") && pathname.endsWith("/edit")) {
+    return {
+      title: "Editar gasto",
+      description: "Edite o gasto sem perder o histórico."
+    };
+  }
+
+  if (pathname.startsWith("/expenses/")) {
+    return PAGE_TITLES["/expenses/new"];
+  }
+
   return PAGE_TITLES[pathname] ?? PAGE_TITLES["/"];
 }
 

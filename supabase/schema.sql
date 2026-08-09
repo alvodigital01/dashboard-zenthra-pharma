@@ -99,3 +99,71 @@ create policy "Users can delete own sales"
 on public.sales
 for delete
 using (auth.uid() = user_id);
+
+create table if not exists public.expenses (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default timezone('utc', now()),
+  updated_at timestamptz not null default timezone('utc', now()),
+  expense_date date not null,
+  description text not null,
+  category text,
+  amount numeric(12, 2) not null check (amount > 0),
+  payment_method text not null default 'pix',
+  installments integer,
+  notes text,
+  user_id uuid not null default auth.uid() references auth.users (id) on delete cascade
+);
+
+alter table public.expenses
+  drop constraint if exists expenses_payment_method_check;
+
+alter table public.expenses
+  add constraint expenses_payment_method_check
+  check (payment_method in ('cash', 'pix', 'debit_card', 'credit_card'));
+
+alter table public.expenses
+  drop constraint if exists expenses_installments_check;
+
+alter table public.expenses
+  add constraint expenses_installments_check
+  check (
+    (payment_method = 'credit_card' and installments between 1 and 5)
+    or (payment_method <> 'credit_card' and installments is null)
+  );
+
+create index if not exists expenses_user_id_idx on public.expenses (user_id);
+create index if not exists expenses_expense_date_idx on public.expenses (expense_date desc);
+create index if not exists expenses_category_idx on public.expenses (category);
+
+drop trigger if exists set_expenses_updated_at on public.expenses;
+create trigger set_expenses_updated_at
+before update on public.expenses
+for each row
+execute function public.handle_updated_at();
+
+alter table public.expenses enable row level security;
+
+drop policy if exists "Users can view own expenses" on public.expenses;
+create policy "Users can view own expenses"
+on public.expenses
+for select
+using (auth.uid() = user_id);
+
+drop policy if exists "Users can insert own expenses" on public.expenses;
+create policy "Users can insert own expenses"
+on public.expenses
+for insert
+with check (auth.uid() = user_id);
+
+drop policy if exists "Users can update own expenses" on public.expenses;
+create policy "Users can update own expenses"
+on public.expenses
+for update
+using (auth.uid() = user_id)
+with check (auth.uid() = user_id);
+
+drop policy if exists "Users can delete own expenses" on public.expenses;
+create policy "Users can delete own expenses"
+on public.expenses
+for delete
+using (auth.uid() = user_id);
