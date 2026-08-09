@@ -42,7 +42,7 @@ export function MobileTabBar() {
               className={cn(
                 "flex min-w-0 flex-col items-center justify-center gap-1 rounded-[22px] px-2 py-2.5 text-[0.68rem] font-semibold tracking-[0.02em] transition-all duration-200",
                 item.highlight
-                  ? "bg-[linear-gradient(135deg,rgba(14,43,91,1),rgba(20,77,146,1))] text-white shadow-soft"
+                  ? "bg-[linear-gradient(135deg,#202020,#101010)] text-[#e0bf79] shadow-soft ring-1 ring-[#c7a662]/20"
                   : active
                     ? "bg-primary/[0.08] text-primary"
                     : "text-slate-500 hover:bg-slate-100/80 hover:text-slate-900"
@@ -52,7 +52,7 @@ export function MobileTabBar() {
                 className={cn(
                   "flex h-9 w-9 items-center justify-center rounded-2xl transition",
                   item.highlight
-                    ? "bg-white/10 text-white"
+                    ? "bg-[#c7a662]/15 text-[#e0bf79]"
                     : active
                       ? "bg-white text-primary shadow-soft"
                       : "bg-slate-100/80 text-slate-500"

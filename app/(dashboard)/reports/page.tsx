@@ -51,9 +51,9 @@ export default async function ReportsPage({
 
       <div className="grid gap-5 md:grid-cols-2 2xl:grid-cols-4">
         <MetricCard
-          title="Total vendido"
+          title="Itens vendidos"
           value={formatNumber(data.summary.totalQuantity)}
-          description="Quantidade válida no período."
+          description="Bancos e espumas pagos ou concluídos no período."
           icon={PackageCheck}
         />
         <MetricCard
@@ -66,7 +66,7 @@ export default async function ReportsPage({
         <MetricCard
           title="Vendas registradas"
           value={formatNumber(data.summary.salesCount)}
-          description="Vendas válidas no período."
+          description="Todos os registros do período."
           icon={ListChecks}
         />
         <MetricCard

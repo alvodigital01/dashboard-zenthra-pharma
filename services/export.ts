@@ -3,7 +3,7 @@ import type { SaleRecord } from "@/types/sales";
 
 const CSV_HEADERS = [
   "Data",
-  "Produto",
+    "Banco/Espuma",
   "Categoria",
   "Quantidade",
   "Valor unitário",

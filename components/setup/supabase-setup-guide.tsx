@@ -36,14 +36,15 @@ const setupSteps = [
 export function SupabaseSetupGuide() {
   return (
     <main className="min-h-screen px-6 py-10">
-      <div className="mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-        <section className="relative overflow-hidden rounded-[40px] bg-brand-veil px-8 py-10 text-white shadow-float lg:px-10 lg:py-12">
+      <div className="mx-auto grid min-h-[calc(100vh-5rem)] min-w-0 max-w-7xl grid-cols-1 gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+        <section className="brand-dark-panel relative overflow-hidden rounded-[40px] px-8 py-10 text-white shadow-float lg:px-10 lg:py-12">
           <div className="absolute inset-0">
             <div className="absolute right-[-44px] top-[-48px] h-60 w-60 rounded-[42%] border border-white/10" />
-            <div className="absolute bottom-[-72px] left-[-40px] h-72 w-72 rounded-[45%] bg-[radial-gradient(circle_at_center,rgba(47,107,188,0.28),transparent_64%)]" />
+            <div className="absolute bottom-[-72px] left-[-40px] h-72 w-72 rounded-[45%] bg-[radial-gradient(circle_at_center,rgba(197,47,48,0.22),transparent_64%)]" />
+            <div className="absolute -left-12 top-[42%] h-1 w-56 -rotate-12 bg-[linear-gradient(90deg,transparent,rgba(197,47,48,0.72),transparent)]" />
           </div>
           <div className="relative z-10">
-            <BrandLogo theme="dark" subtitle="Setup orientation" />
+            <BrandLogo theme="dark" subtitle="Configuração do dashboard" />
             <span className="inline-flex rounded-full bg-amber-400/[0.15] px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-amber-200">
               Configuração necessária
             </span>
@@ -68,7 +69,7 @@ export function SupabaseSetupGuide() {
                     className="rounded-[28px] border border-white/10 bg-white/5 p-5"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="rounded-2xl bg-white/10 p-3 text-cyan-200">
+                      <div className="rounded-2xl bg-[#c7a662]/15 p-3 text-[#e0bf79]">
                         <Icon className="h-5 w-5" />
                       </div>
                       <div>
@@ -128,8 +129,7 @@ export function SupabaseSetupGuide() {
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 text-emerald-600" />
                   <p>
-                    Rode o SQL de [supabase/schema.sql](/d:/ESTUDOS/dashboard-zenthra-pharma/supabase/schema.sql:1)
-                    no SQL Editor do Supabase.
+                    Rode o arquivo `supabase/schema.sql` no SQL Editor do Supabase.
                   </p>
                 </div>
                 <div className="flex items-start gap-3">

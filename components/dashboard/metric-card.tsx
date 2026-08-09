@@ -91,8 +91,8 @@ export function MetricCard({
               tone === "success"
                 ? "bg-emerald-50 text-emerald-700"
                 : tone === "accent"
-                  ? "bg-sky-50 text-sky-700"
-                  : "bg-slate-100 text-slate-700"
+                  ? "bg-red-50 text-red-700"
+                  : "bg-[#c7a662]/15 text-[#76551b]"
             )}
           >
             <Icon className="h-4.5 w-4.5" />

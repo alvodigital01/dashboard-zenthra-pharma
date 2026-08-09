@@ -124,7 +124,7 @@ export function FiltersBar({
                     onChange={(event) =>
                       setFormState((current) => ({ ...current, search: event.target.value }))
                     }
-                    placeholder="Buscar por nome do produto"
+                    placeholder="Buscar por banco ou espuma"
                     className="pl-11"
                   />
                 </div>
@@ -134,7 +134,7 @@ export function FiltersBar({
             {showProductFilter ? (
               <div className="space-y-2">
                 <label className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-slate-500">
-                  Produto
+                  Banco / espuma
                 </label>
                 <Select
                   value={formState.product}
@@ -142,7 +142,7 @@ export function FiltersBar({
                     setFormState((current) => ({ ...current, product: event.target.value }))
                   }
                 >
-                  <option value="">Todos os produtos</option>
+                  <option value="">Todos os bancos e espumas</option>
                   {productOptions.map((productName) => (
                     <option key={productName} value={productName}>
                       {productName}
@@ -227,7 +227,7 @@ export function FiltersBar({
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 border-t border-[rgba(16,46,94,0.08)] pt-1 sm:flex-row sm:flex-wrap sm:items-center">
+          <div className="flex flex-col gap-3 border-t border-[rgba(138,105,47,0.12)] pt-1 sm:flex-row sm:flex-wrap sm:items-center">
             <Button type="submit" disabled={isPending} className="w-full sm:w-auto">
               Aplicar
             </Button>

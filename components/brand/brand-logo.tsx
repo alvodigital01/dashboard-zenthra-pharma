@@ -1,12 +1,13 @@
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
+import rochaLogo from "@/logorochacustombancos.jpeg";
 
 export function BrandLogo({
   theme = "dark",
   compact = false,
   className,
-  subtitle = "Sales command center"
+  subtitle = "Bancos & espumas"
 }: {
   theme?: "dark" | "light";
   compact?: boolean;
@@ -14,51 +15,34 @@ export function BrandLogo({
   subtitle?: string;
 }) {
   return (
-    <div className={cn("flex items-center gap-3", className)}>
+    <div className={cn("flex min-w-0 flex-col items-start gap-2", className)}>
       <div
         className={cn(
-          "relative overflow-hidden rounded-[22px] border p-1.5",
+          "relative overflow-hidden rounded-[18px] border bg-[#0b0b0a] shadow-[0_18px_40px_-24px_rgba(0,0,0,0.75)]",
+          compact ? "h-[52px] w-44 sm:w-52" : "h-[78px] w-full max-w-[340px]",
           theme === "dark"
-            ? "border-white/10 bg-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
-            : "border-[rgba(17,45,92,0.08)] bg-white shadow-soft"
+            ? "border-[#c99543]/25"
+            : "border-[#b37c2d]/20"
         )}
       >
-        <div
-          className={cn(
-            "relative overflow-hidden rounded-[18px] bg-white",
-            compact ? "h-11 w-11" : "h-14 w-14"
-          )}
-        >
-          <Image
-            src="/brand-logo.png"
-            alt="Logo Zenthra"
-            fill
-            sizes={compact ? "44px" : "56px"}
-            className="object-cover object-center scale-[1.08]"
-            priority
-          />
-        </div>
+        <Image
+          src={rochaLogo}
+          alt="Rocha Custom Bancos"
+          fill
+          sizes={compact ? "208px" : "340px"}
+          className="object-contain object-left"
+          priority
+        />
       </div>
 
-      <div>
-        <p
-          className={cn(
-            "font-display leading-none tracking-[0.02em]",
-            compact ? "text-[1.55rem]" : "text-[2rem]",
-            theme === "dark" ? "text-white" : "text-slate-950"
-          )}
-        >
-          Zenthra
-        </p>
-        <p
-          className={cn(
-            "text-xs uppercase tracking-[0.22em]",
-            theme === "dark" ? "text-slate-400" : "text-slate-500"
-          )}
-        >
-          {subtitle}
-        </p>
-      </div>
+      <p
+        className={cn(
+          "pl-1 text-[0.62rem] font-semibold uppercase tracking-[0.26em]",
+          theme === "dark" ? "text-[#d7ad68]" : "text-[#8e6528]"
+        )}
+      >
+        {subtitle}
+      </p>
     </div>
   );
 }

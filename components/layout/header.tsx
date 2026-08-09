@@ -53,15 +53,15 @@ export function Header({
             </Button>
 
             <div className="hidden flex-wrap items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-slate-500 md:flex">
-              <span>Zenthra pharma</span>
+              <span>Rocha Custom Bancos</span>
               <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
               <span className="truncate">{meta.title}</span>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="hidden items-center gap-3 rounded-[22px] border border-[rgba(16,46,94,0.08)] bg-white/[0.88] px-4 py-3 xl:flex">
-              <div className="rounded-2xl bg-primary/[0.06] p-2 text-primary">
+            <div className="hidden items-center gap-3 rounded-[22px] border border-[rgba(138,105,47,0.12)] bg-white/[0.88] px-4 py-3 xl:flex">
+              <div className="rounded-2xl bg-primary/[0.12] p-2 text-[#76551b]">
                 <CalendarDays className="h-4 w-4" />
               </div>
               <div>
@@ -88,8 +88,8 @@ export function Header({
             ) : null}
           </div>
 
-          <div className="hidden min-w-0 items-center gap-3 rounded-[22px] border border-[rgba(16,46,94,0.08)] bg-white/[0.88] px-4 py-3 sm:flex">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[18px] bg-primary text-sm font-semibold text-white">
+          <div className="hidden min-w-0 items-center gap-3 rounded-[22px] border border-[rgba(138,105,47,0.12)] bg-white/[0.88] px-4 py-3 sm:flex">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[18px] bg-primary text-sm font-semibold text-primary-foreground">
               {getInitials(userEmail)}
             </div>
             <div className="min-w-0">

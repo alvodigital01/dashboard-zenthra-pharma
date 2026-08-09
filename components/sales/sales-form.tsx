@@ -31,7 +31,7 @@ import type {
 const saleSchema = z
   .object({
     saleDate: z.string().min(1, "A data da venda é obrigatória."),
-    productName: z.string().min(1, "O produto é obrigatório."),
+    productName: z.string().min(1, "Informe o banco ou a espuma."),
     productCategory: z.string().optional(),
     quantity: z.coerce.number().int().positive("A quantidade deve ser maior que zero."),
     unitPrice: z.coerce.number().positive("O valor unitário deve ser maior que zero."),
@@ -210,9 +210,9 @@ export function SalesForm({
         <CardTitle>{initialData ? "Atualizar venda" : "Registrar nova venda"}</CardTitle>
       </CardHeader>
       <CardContent>
-        <form className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]" onSubmit={handleSubmit(onSubmit)}>
+        <form className="grid min-w-0 grid-cols-1 gap-6 xl:grid-cols-[1.15fr_0.85fr]" onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-6">
-            <div className="rounded-[30px] border border-[rgba(16,46,94,0.08)] bg-slate-50/60 p-5">
+            <div className="rounded-[30px] border border-[rgba(138,105,47,0.12)] bg-[#faf7f0]/80 p-5">
               <div className="mb-5 space-y-1">
                 <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-500">
                   Detalhes da venda
@@ -239,11 +239,11 @@ export function SalesForm({
                     htmlFor="productName"
                     className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-slate-500"
                   >
-                    Nome do produto
+                    Banco ou espuma
                   </label>
                   <Input
                     id="productName"
-                    placeholder="Ex.: Amoxicilina 500mg"
+                    placeholder="Ex.: Banco CG 160 personalizado"
                     {...register("productName")}
                   />
                   {errors.productName ? (
@@ -256,9 +256,18 @@ export function SalesForm({
                     htmlFor="productCategory"
                     className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-slate-500"
                   >
-                    Categoria do produto
+                    Categoria
                   </label>
-                  <Input id="productCategory" placeholder="Opcional" {...register("productCategory")} />
+                  <Input
+                    id="productCategory"
+                    list="product-categories"
+                    placeholder="Selecione ou digite: Bancos / Espumas"
+                    {...register("productCategory")}
+                  />
+                  <datalist id="product-categories">
+                    <option value="Bancos" />
+                    <option value="Espumas" />
+                  </datalist>
                 </div>
 
                 <div className="space-y-2">
@@ -345,7 +354,7 @@ export function SalesForm({
               </div>
             </div>
 
-            <div className="rounded-[30px] border border-[rgba(16,46,94,0.08)] bg-slate-50/60 p-5">
+            <div className="rounded-[30px] border border-[rgba(138,105,47,0.12)] bg-[#faf7f0]/80 p-5">
               <div className="mb-5 space-y-1">
                 <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-500">
                   Contexto comercial
@@ -373,7 +382,7 @@ export function SalesForm({
                   >
                     Pedido ou identificador
                   </label>
-                  <Input id="orderCode" placeholder="Opcional" {...register("orderCode")} />
+                  <Input id="orderCode" placeholder="Ex.: PED-001 ou OS-001" {...register("orderCode")} />
                 </div>
 
                 <div className="space-y-2 lg:col-span-2">
@@ -385,7 +394,7 @@ export function SalesForm({
                   </label>
                   <Textarea
                     id="notes"
-                    placeholder="Informações adicionais sobre a venda"
+                    placeholder="Modelo do veículo, medidas ou densidade da espuma, cor e acabamento"
                     {...register("notes")}
                   />
                 </div>
@@ -394,8 +403,8 @@ export function SalesForm({
           </div>
 
           <div className="space-y-5 xl:sticky xl:top-28 xl:self-start">
-            <div className="overflow-hidden rounded-[32px] bg-[linear-gradient(145deg,rgba(9,25,55,1),rgba(12,45,93,1))] p-6 text-white shadow-float">
-              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-cyan-100">
+            <div className="overflow-hidden rounded-[32px] bg-[radial-gradient(circle_at_top_right,rgba(199,166,98,0.2),transparent_38%),linear-gradient(145deg,#202020,#101010)] p-6 text-white shadow-float">
+              <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-[#e0bf79]">
                 Resumo financeiro
               </p>
               <p className="mt-3 text-sm leading-7 text-slate-300">
@@ -430,7 +439,7 @@ export function SalesForm({
               </div>
             </div>
 
-            <div className="rounded-[30px] border border-[rgba(16,46,94,0.08)] bg-white/90 p-5 shadow-soft">
+            <div className="rounded-[30px] border border-[rgba(138,105,47,0.12)] bg-white/90 p-5 shadow-soft">
               <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-slate-500">
                 Validação
               </p>

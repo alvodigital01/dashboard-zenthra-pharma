@@ -33,7 +33,7 @@ export function SummaryTable({
               {rows.map((row) => (
                 <div
                   key={row.periodKey}
-                  className="rounded-[24px] border border-[rgba(16,46,94,0.08)] bg-white/[0.86] p-4 shadow-soft"
+                  className="rounded-[24px] border border-[rgba(138,105,47,0.12)] bg-white/[0.86] p-4 shadow-soft"
                 >
                   <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Período</p>
                   <p className="mt-2 text-lg font-semibold leading-tight text-slate-900">
@@ -42,7 +42,7 @@ export function SummaryTable({
 
                   <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4 text-sm">
                     <SummaryValue label="Vendas" value={formatNumber(row.salesCount)} />
-                    <SummaryValue label="Qtd." value={formatNumber(row.totalQuantity)} />
+                    <SummaryValue label="Itens" value={formatNumber(row.totalQuantity)} />
                     <SummaryValue label="Receita" value={formatCurrencyBRL(row.totalRevenue)} />
                     <SummaryValue
                       label="Ticket médio"
@@ -53,14 +53,14 @@ export function SummaryTable({
               ))}
             </div>
 
-            <div className="hidden overflow-hidden rounded-[28px] border border-[rgba(16,46,94,0.08)] md:block">
+            <div className="hidden overflow-hidden rounded-[28px] border border-[rgba(138,105,47,0.12)] md:block">
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[720px] text-left text-sm">
                   <thead className="bg-slate-50/80 text-xs uppercase tracking-[0.14em] text-muted-foreground">
                     <tr>
                       <th className="whitespace-nowrap px-5 py-4 font-medium">Período</th>
                       <th className="whitespace-nowrap px-5 py-4 font-medium">Vendas</th>
-                      <th className="whitespace-nowrap px-5 py-4 font-medium">Qtd.</th>
+                      <th className="whitespace-nowrap px-5 py-4 font-medium">Itens</th>
                       <th className="whitespace-nowrap px-5 py-4 font-medium">Receita</th>
                       <th className="whitespace-nowrap px-5 py-4 font-medium">Ticket médio</th>
                     </tr>

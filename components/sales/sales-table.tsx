@@ -60,13 +60,13 @@ export function SalesTable({ sales }: { sales: SaleRecord[] }) {
         <CardTitle>Todas as vendas</CardTitle>
       </CardHeader>
       <CardContent className="space-y-5">
-        <div className="hidden overflow-hidden rounded-[28px] border border-[rgba(16,46,94,0.08)] lg:block">
+        <div className="hidden overflow-hidden rounded-[28px] border border-[rgba(138,105,47,0.12)] lg:block">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[1120px] text-left text-sm">
               <thead className="bg-slate-50/80 text-xs uppercase tracking-[0.14em] text-muted-foreground">
                 <tr>
                   <th className="whitespace-nowrap px-5 py-4 font-medium">Data</th>
-                  <th className="whitespace-nowrap px-5 py-4 font-medium">Produto</th>
+                  <th className="whitespace-nowrap px-5 py-4 font-medium">Banco / espuma</th>
                   <th className="whitespace-nowrap px-5 py-4 font-medium">Status</th>
                   <th className="whitespace-nowrap px-5 py-4 font-medium">Quantidade</th>
                   <th className="whitespace-nowrap px-5 py-4 font-medium">Valor unit.</th>
@@ -138,7 +138,7 @@ export function SalesTable({ sales }: { sales: SaleRecord[] }) {
           {sales.map((sale) => (
             <div
               key={sale.id}
-              className="rounded-[30px] border border-[rgba(16,46,94,0.08)] bg-white/[0.86] p-5 shadow-soft"
+              className="rounded-[30px] border border-[rgba(138,105,47,0.12)] bg-white/[0.86] p-5 shadow-soft"
             >
               <div className="flex items-start justify-between gap-3">
                 <div>

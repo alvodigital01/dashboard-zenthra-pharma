@@ -1,4 +1,4 @@
-export const APP_NAME = "Zenthra Pharma Sales";
+export const APP_NAME = "Rocha Custom Bancos | Dashboard";
 export const WEEK_STARTS_ON = 1;
 export const DEFAULT_PAGE_SIZE = 10;
 export const VALID_CALCULATION_STATUSES = ["paid", "completed"] as const;
@@ -23,7 +23,7 @@ export const PAYMENT_METHOD_LABELS = {
 
 export const PAGE_TITLES: Record<string, { title: string; description: string }> = {
   "/": {
-    title: "Dashboard Zenthra",
+    title: "Dashboard Rocha Custom",
     description: ""
   },
   "/sales": {

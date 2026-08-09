@@ -40,9 +40,9 @@ export default async function SalesPage({
           icon={Rows3}
         />
         <MetricCard
-          title="Produtos mapeados"
+          title="Bancos e espumas cadastrados"
           value={String(data.productOptions.length)}
-          description="Produtos disponíveis no filtro."
+          description="Modelos disponíveis no histórico."
           icon={PackageSearch}
           tone="accent"
         />
