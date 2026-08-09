@@ -1,8 +1,13 @@
 import { DEFAULT_PAGE_SIZE, FILTER_PERIODS } from "@/lib/constants";
 import type { createServerSupabaseClient } from "@/lib/supabase/server";
-import type { ExpenseRecord, ExpensesFilters, ExpensesPageData } from "@/types/expenses";
+import type { ExpenseRecord, ExpensesFilters, ExpensesPageData, ExpensesReportsData } from "@/types/expenses";
 import { getCurrentMonthRange, getCurrentWeekRange, resolveDateRange, formatDateInput } from "@/utils/date";
-import { buildDashboardExpenseMetrics } from "@/utils/expenses";
+import {
+  buildDashboardExpenseMetrics,
+  calculateExpenseSummaryMetrics,
+  groupExpensesByMonth,
+  groupExpensesByWeek
+} from "@/utils/expenses";
 
 type TypedSupabaseClient = ReturnType<typeof createServerSupabaseClient>;
 
@@ -114,6 +119,37 @@ export async function getExpensesPageData(
     totalPages: Math.max(1, Math.ceil(totalCount / filters.pageSize)),
     categoryOptions,
     filters
+  };
+}
+
+export async function getExpensesForPeriod(
+  client: TypedSupabaseClient,
+  period: ExpensesFilters["period"],
+  dateFrom?: string,
+  dateTo?: string
+): Promise<ExpensesReportsData> {
+  const range = resolveDateRange(period, dateFrom, dateTo);
+  let query: any = client.from("expenses").select("*");
+
+  if (range) {
+    query = query
+      .gte("expense_date", formatDateInput(range.from))
+      .lte("expense_date", formatDateInput(range.to));
+  }
+
+  const { data, error } = await query.order("expense_date", { ascending: true });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  const expenses = (data ?? []) as ExpenseRecord[];
+
+  return {
+    expenses,
+    summary: calculateExpenseSummaryMetrics(expenses),
+    weeklyRows: groupExpensesByWeek(expenses),
+    monthlyRows: groupExpensesByMonth(expenses)
   };
 }
 

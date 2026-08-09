@@ -35,3 +35,17 @@ export interface DashboardExpenseMetrics {
   week: ExpenseSummaryMetrics;
   month: ExpenseSummaryMetrics;
 }
+
+export interface ExpensePeriodSummaryRow {
+  periodKey: string;
+  label: string;
+  totalAmount: number;
+  expensesCount: number;
+}
+
+export interface ExpensesReportsData {
+  expenses: ExpenseRecord[];
+  summary: ExpenseSummaryMetrics;
+  weeklyRows: ExpensePeriodSummaryRow[];
+  monthlyRows: ExpensePeriodSummaryRow[];
+}
