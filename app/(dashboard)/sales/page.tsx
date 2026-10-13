@@ -4,6 +4,7 @@ import { Layers3, PackageSearch, Rows3 } from "lucide-react";
 
 import { MetricCard } from "@/components/dashboard/metric-card";
 import { FiltersBar } from "@/components/sales/filters-bar";
+import { PendingSalesImport } from "@/components/sales/pending-sales-import";
 import { SalesTable } from "@/components/sales/sales-table";
 import { buttonVariants } from "@/components/ui/button";
 import { PageHeader } from "@/components/ui/page-header";
@@ -31,6 +32,8 @@ export default async function SalesPage({
           </Link>
         }
       />
+
+      <PendingSalesImport />
 
       <div className="grid gap-4 md:grid-cols-3 lg:gap-5">
         <MetricCard
