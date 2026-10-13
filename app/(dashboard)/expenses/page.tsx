@@ -4,6 +4,7 @@ import { Layers3, ReceiptText, Wallet } from "lucide-react";
 
 import { MetricCard } from "@/components/dashboard/metric-card";
 import { ExpensesFiltersBar } from "@/components/expenses/filters-bar";
+import { PendingExpensesImport } from "@/components/expenses/pending-expenses-import";
 import { ExpensesPagination } from "@/components/expenses/pagination";
 import { ExpensesTable } from "@/components/expenses/expenses-table";
 import { buttonVariants } from "@/components/ui/button";
@@ -34,6 +35,8 @@ export default async function ExpensesPage({
           </Link>
         }
       />
+
+      <PendingExpensesImport />
 
       <div className="grid gap-4 md:grid-cols-3 lg:gap-5">
         <MetricCard

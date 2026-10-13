@@ -1,6 +1,6 @@
 "use client";
 
-import { Download, CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Download } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { startTransition, useState } from "react";
 import { toast } from "sonner";
@@ -11,34 +11,73 @@ import { createBrowserSupabaseClient } from "@/lib/supabase/browser";
 import { formatCurrencyBRL } from "@/lib/utils";
 import type { SaleInsert } from "@/types/sales";
 
-const IMPORT_DATE = "2026-10-13";
-const IMPORT_PREFIX = "LOTE-2026-10-13";
+type ImportSale = {
+  customerName: string;
+  unitPrice: number;
+  saleDate: string;
+};
 
-const salesToImport = [
-  { customerName: "Beto Tapeçaria", unitPrice: 450 },
-  { customerName: "Marcos Tapeceiro", unitPrice: 160 },
-  { customerName: "Tapeçaria em Frente ao Campo", unitPrice: 100 },
-  { customerName: "DWR Tapeçaria", unitPrice: 350 },
-  { customerName: "Tapeçaria Iguaçu", unitPrice: 540 },
-  { customerName: "Tapeçaria Elshaday", unitPrice: 306 },
-  { customerName: "Tapeçaria 2 Irmãos", unitPrice: 80 },
-  { customerName: "Art Gold", unitPrice: 899 },
-  { customerName: "Vanderlei", unitPrice: 330 },
-  { customerName: "Leo Estofados", unitPrice: 750 },
-  { customerName: "Beto Tapeçaria", unitPrice: 198 },
-  { customerName: "Arnaldo", unitPrice: 68 },
-  { customerName: "Junior Soufa", unitPrice: 1350 },
-  { customerName: "Graciosa", unitPrice: 188 },
-  { customerName: "Art Gold", unitPrice: 1600 },
-  { customerName: "Prado", unitPrice: 720 }
-] as const;
+type ImportBatch = {
+  title: string;
+  prefix: string;
+  description: string;
+  notes: string;
+  sales: readonly ImportSale[];
+};
 
-const importTotal = salesToImport.reduce((total, sale) => total + sale.unitPrice, 0);
+const informedSalesBatch: ImportBatch = {
+  title: "16 vendas de 13/10/2026",
+  prefix: "LOTE-2026-10-13",
+  description:
+    "Categoria Espumas, status Pago, quantidade 1 e pagamento via Pix. As saídas e a venda sem valor não fazem parte deste lote.",
+  notes: "Importação em lote das vendas informadas em 13/10/2026.",
+  sales: [
+    { customerName: "Beto Tapeçaria", unitPrice: 450, saleDate: "2026-10-13" },
+    { customerName: "Marcos Tapeceiro", unitPrice: 160, saleDate: "2026-10-13" },
+    { customerName: "Tapeçaria em Frente ao Campo", unitPrice: 100, saleDate: "2026-10-13" },
+    { customerName: "DWR Tapeçaria", unitPrice: 350, saleDate: "2026-10-13" },
+    { customerName: "Tapeçaria Iguaçu", unitPrice: 540, saleDate: "2026-10-13" },
+    { customerName: "Tapeçaria Elshaday", unitPrice: 306, saleDate: "2026-10-13" },
+    { customerName: "Tapeçaria 2 Irmãos", unitPrice: 80, saleDate: "2026-10-13" },
+    { customerName: "Art Gold", unitPrice: 899, saleDate: "2026-10-13" },
+    { customerName: "Vanderlei", unitPrice: 330, saleDate: "2026-10-13" },
+    { customerName: "Leo Estofados", unitPrice: 750, saleDate: "2026-10-13" },
+    { customerName: "Beto Tapeçaria", unitPrice: 198, saleDate: "2026-10-13" },
+    { customerName: "Arnaldo", unitPrice: 68, saleDate: "2026-10-13" },
+    { customerName: "Junior Soufa", unitPrice: 1350, saleDate: "2026-10-13" },
+    { customerName: "Graciosa", unitPrice: 188, saleDate: "2026-10-13" },
+    { customerName: "Art Gold", unitPrice: 1600, saleDate: "2026-10-13" },
+    { customerName: "Prado", unitPrice: 720, saleDate: "2026-10-13" }
+  ]
+};
 
-export function PendingSalesImport() {
+const receiptSalesBatch: ImportBatch = {
+  title: "8 vendas dos comprovantes de outubro",
+  prefix: "COMPROVANTES-OUT-2026",
+  description:
+    "Datas conforme os comprovantes, categoria Espumas, status Pago, quantidade 1 e pagamento via Pix.",
+  notes: "Importação em lote a partir dos comprovantes de Pix de outubro de 2026.",
+  sales: [
+    { customerName: "Andreia Roque dos Santos", unitPrice: 320, saleDate: "2026-10-09" },
+    { customerName: "Tapeçaria Rodricar Ltda", unitPrice: 238, saleDate: "2026-10-02" },
+    {
+      customerName: "Alessandra A. da Silva - Móveis e Decorações Ltda",
+      unitPrice: 880,
+      saleDate: "2026-10-08"
+    },
+    { customerName: "Ismael Ruiz", unitPrice: 96, saleDate: "2026-10-06" },
+    { customerName: "José Junior Teixeira", unitPrice: 2000, saleDate: "2026-10-06" },
+    { customerName: "Enio Rocha Viana", unitPrice: 100, saleDate: "2026-10-09" },
+    { customerName: "C.L. Faria Estofados Ltda", unitPrice: 160, saleDate: "2026-10-03" },
+    { customerName: "Agilenildo da Silva Brito", unitPrice: 350, saleDate: "2026-10-09" }
+  ]
+};
+
+function ImportBatchCard({ batch }: { batch: ImportBatch }) {
   const router = useRouter();
   const [isImporting, setIsImporting] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
+  const importTotal = batch.sales.reduce((total, sale) => total + sale.unitPrice, 0);
 
   const handleImport = async () => {
     const supabase = createBrowserSupabaseClient();
@@ -55,8 +94,8 @@ export function PendingSalesImport() {
       return;
     }
 
-    const importCodes = salesToImport.map(
-      (_, index) => `${IMPORT_PREFIX}-${String(index + 1).padStart(2, "0")}`
+    const importCodes = batch.sales.map(
+      (_, index) => `${batch.prefix}-${String(index + 1).padStart(2, "0")}`
     );
     const { data: existingSales, error: lookupError } = await supabase
       .from("sales")
@@ -74,7 +113,7 @@ export function PendingSalesImport() {
         .map((sale) => sale.order_code)
         .filter(Boolean)
     );
-    const pendingRows: SaleInsert[] = salesToImport.flatMap((sale, index) => {
+    const pendingRows: SaleInsert[] = batch.sales.flatMap((sale, index) => {
       const orderCode = importCodes[index];
 
       if (existingCodes.has(orderCode)) {
@@ -83,7 +122,7 @@ export function PendingSalesImport() {
 
       return [
         {
-          sale_date: IMPORT_DATE,
+          sale_date: sale.saleDate,
           product_name: "Espuma",
           product_category: "Espumas",
           quantity: 1,
@@ -93,7 +132,7 @@ export function PendingSalesImport() {
           customer_name: sale.customerName,
           order_code: orderCode,
           status: "paid",
-          notes: "Importação em lote das vendas informadas em 13/10/2026.",
+          notes: batch.notes,
           user_id: user.id
         }
       ];
@@ -102,7 +141,7 @@ export function PendingSalesImport() {
     if (!pendingRows.length) {
       setIsImporting(false);
       setIsComplete(true);
-      toast.info("As 16 vendas deste lote já foram importadas.");
+      toast.info(`As ${batch.sales.length} vendas deste lote já foram importadas.`);
       return;
     }
 
@@ -132,10 +171,9 @@ export function PendingSalesImport() {
     <Card className="border-[rgba(138,105,47,0.24)] bg-[linear-gradient(135deg,#fffdf8,#f7efe0)]">
       <CardHeader className="pb-4">
         <CardDescription>Importação preparada</CardDescription>
-        <CardTitle>16 vendas de 13/10/2026</CardTitle>
+        <CardTitle>{batch.title}</CardTitle>
         <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
-          Total de {formatCurrencyBRL(importTotal)}, com categoria Espumas, status Pago,
-          quantidade 1 e pagamento via Pix. As saídas e a venda sem valor não fazem parte deste lote.
+          Total de {formatCurrencyBRL(importTotal)}. {batch.description}
         </p>
       </CardHeader>
       <CardContent className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -144,9 +182,22 @@ export function PendingSalesImport() {
         </p>
         <Button onClick={handleImport} disabled={isImporting || isComplete} className="w-full sm:w-auto">
           {isComplete ? <CheckCircle2 size={17} /> : <Download size={17} />}
-          {isImporting ? "Importando..." : isComplete ? "Lote importado" : "Importar 16 vendas"}
+          {isImporting
+            ? "Importando..."
+            : isComplete
+              ? "Lote importado"
+              : `Importar ${batch.sales.length} vendas`}
         </Button>
       </CardContent>
     </Card>
+  );
+}
+
+export function PendingSalesImport() {
+  return (
+    <div className="space-y-4">
+      <ImportBatchCard batch={receiptSalesBatch} />
+      <ImportBatchCard batch={informedSalesBatch} />
+    </div>
   );
 }
