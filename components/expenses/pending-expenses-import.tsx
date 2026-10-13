@@ -2,7 +2,7 @@
 
 import { CheckCircle2, Download } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { startTransition, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -71,11 +71,46 @@ const expensesToImport = [
 ] as const;
 
 const importTotal = expensesToImport.reduce((total, expense) => total + expense.amount, 0);
+const importMarkers = expensesToImport.map(
+  (_, index) => `${IMPORT_PREFIX}-${String(index + 1).padStart(2, "0")}`
+);
 
 export function PendingExpensesImport() {
   const router = useRouter();
   const [isImporting, setIsImporting] = useState(false);
+  const [isChecking, setIsChecking] = useState(true);
   const [isComplete, setIsComplete] = useState(false);
+
+  useEffect(() => {
+    let isActive = true;
+
+    async function checkImportStatus() {
+      const supabase = createBrowserSupabaseClient();
+      const { data, error } = await supabase
+        .from("expenses")
+        .select("notes")
+        .in("notes", importMarkers);
+
+      if (isActive) {
+        if (!error) {
+          const existingMarkers = new Set(
+            ((data ?? []) as Array<{ notes: string | null }>)
+              .map((expense) => expense.notes)
+              .filter(Boolean)
+          );
+          setIsComplete(importMarkers.every((marker) => existingMarkers.has(marker)));
+        }
+
+        setIsChecking(false);
+      }
+    }
+
+    void checkImportStatus();
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
 
   const handleImport = async () => {
     const supabase = createBrowserSupabaseClient();
@@ -92,9 +127,6 @@ export function PendingExpensesImport() {
       return;
     }
 
-    const importMarkers = expensesToImport.map(
-      (_, index) => `${IMPORT_PREFIX}-${String(index + 1).padStart(2, "0")}`
-    );
     const { data: existingExpenses, error: lookupError } = await supabase
       .from("expenses")
       .select("notes")
@@ -173,11 +205,23 @@ export function PendingExpensesImport() {
       </CardHeader>
       <CardContent className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-slate-600">
-          O sistema verifica o lote antes de salvar para evitar registros duplicados.
+          {isComplete
+            ? "Este lote já foi importado e não será duplicado."
+            : "O sistema verifica o lote antes de salvar para evitar registros duplicados."}
         </p>
-        <Button onClick={handleImport} disabled={isImporting || isComplete} className="w-full sm:w-auto">
+        <Button
+          onClick={handleImport}
+          disabled={isChecking || isImporting || isComplete}
+          className="w-full sm:w-auto"
+        >
           {isComplete ? <CheckCircle2 size={17} /> : <Download size={17} />}
-          {isImporting ? "Importando..." : isComplete ? "Lote importado" : "Importar 9 gastos"}
+          {isChecking
+            ? "Verificando..."
+            : isImporting
+              ? "Importando..."
+              : isComplete
+                ? "Lote já importado"
+                : "Importar 9 gastos"}
         </Button>
       </CardContent>
     </Card>

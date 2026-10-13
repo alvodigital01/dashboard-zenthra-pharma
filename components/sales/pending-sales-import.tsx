@@ -2,7 +2,7 @@
 
 import { CheckCircle2, Download } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { startTransition, useState } from "react";
+import { startTransition, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -90,8 +90,47 @@ const additionalSalesBatch: ImportBatch = {
 function ImportBatchCard({ batch }: { batch: ImportBatch }) {
   const router = useRouter();
   const [isImporting, setIsImporting] = useState(false);
+  const [isChecking, setIsChecking] = useState(true);
   const [isComplete, setIsComplete] = useState(false);
   const importTotal = batch.sales.reduce((total, sale) => total + sale.unitPrice, 0);
+  const importCodes = useMemo(
+    () =>
+      batch.sales.map(
+        (_, index) => `${batch.prefix}-${String(index + 1).padStart(2, "0")}`
+      ),
+    [batch]
+  );
+
+  useEffect(() => {
+    let isActive = true;
+
+    async function checkImportStatus() {
+      const supabase = createBrowserSupabaseClient();
+      const { data, error } = await supabase
+        .from("sales")
+        .select("order_code")
+        .in("order_code", importCodes);
+
+      if (isActive) {
+        if (!error) {
+          const existingCodes = new Set(
+            ((data ?? []) as Array<{ order_code: string | null }>)
+              .map((sale) => sale.order_code)
+              .filter(Boolean)
+          );
+          setIsComplete(importCodes.every((code) => existingCodes.has(code)));
+        }
+
+        setIsChecking(false);
+      }
+    }
+
+    void checkImportStatus();
+
+    return () => {
+      isActive = false;
+    };
+  }, [importCodes]);
 
   const handleImport = async () => {
     const supabase = createBrowserSupabaseClient();
@@ -108,9 +147,6 @@ function ImportBatchCard({ batch }: { batch: ImportBatch }) {
       return;
     }
 
-    const importCodes = batch.sales.map(
-      (_, index) => `${batch.prefix}-${String(index + 1).padStart(2, "0")}`
-    );
     const { data: existingSales, error: lookupError } = await supabase
       .from("sales")
       .select("order_code")
@@ -192,14 +228,22 @@ function ImportBatchCard({ batch }: { batch: ImportBatch }) {
       </CardHeader>
       <CardContent className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-slate-600">
-          O sistema verifica o lote antes de salvar para evitar registros duplicados.
+          {isComplete
+            ? "Este lote já foi importado e não será duplicado."
+            : "O sistema verifica o lote antes de salvar para evitar registros duplicados."}
         </p>
-        <Button onClick={handleImport} disabled={isImporting || isComplete} className="w-full sm:w-auto">
+        <Button
+          onClick={handleImport}
+          disabled={isChecking || isImporting || isComplete}
+          className="w-full sm:w-auto"
+        >
           {isComplete ? <CheckCircle2 size={17} /> : <Download size={17} />}
-          {isImporting
+          {isChecking
+            ? "Verificando..."
+            : isImporting
             ? "Importando..."
             : isComplete
-              ? "Lote importado"
+              ? "Lote já importado"
               : `Importar ${batch.sales.length} vendas`}
         </Button>
       </CardContent>
