@@ -113,15 +113,15 @@ export function SalesForm({
     resolver: zodResolver(saleSchema),
     defaultValues: {
       saleDate: initialData?.sale_date ?? new Date().toISOString().slice(0, 10),
-      productName: initialData?.product_name ?? "",
-      productCategory: initialData?.product_category ?? "",
+      productName: initialData?.product_name ?? "Espuma",
+      productCategory: initialData?.product_category ?? "Espumas",
       quantity: initialData?.quantity ?? 1,
       unitPrice: Number(initialData?.unit_price ?? 0),
       paymentMethod: initialData?.payment_method ?? "pix",
       installments: initialData?.installments ?? 1,
       customerName: initialData?.customer_name ?? "",
       orderCode: initialData?.order_code ?? "",
-      status: initialData?.status ?? "pending",
+      status: initialData?.status ?? "paid",
       notes: initialData?.notes ?? ""
     }
   });
@@ -150,15 +150,15 @@ export function SalesForm({
 
     const basePayload = {
       sale_date: values.saleDate,
-      product_name: values.productName.trim(),
-      product_category: sanitizeOptional(values.productCategory),
+      product_name: initialData ? values.productName.trim() : "Espuma",
+      product_category: initialData ? sanitizeOptional(values.productCategory) : "Espumas",
       quantity: values.quantity,
       unit_price: values.unitPrice,
       payment_method: values.paymentMethod as PaymentMethod,
       installments: values.paymentMethod === "credit_card" ? values.installments ?? 1 : null,
       customer_name: sanitizeOptional(values.customerName),
       order_code: sanitizeOptional(values.orderCode),
-      status: values.status as SaleStatus,
+      status: initialData ? (values.status as SaleStatus) : "paid",
       notes: sanitizeOptional(values.notes)
     };
 
@@ -234,22 +234,26 @@ export function SalesForm({
                   ) : null}
                 </div>
 
-                <div className="space-y-2">
-                  <label
-                    htmlFor="productName"
-                    className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-slate-500"
-                  >
-                    Banco ou espuma
-                  </label>
-                  <Input
-                    id="productName"
-                    placeholder="Ex.: Banco CG 160 personalizado"
-                    {...register("productName")}
-                  />
-                  {errors.productName ? (
-                    <p className="text-sm text-danger">{errors.productName.message}</p>
-                  ) : null}
-                </div>
+                {initialData ? (
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="productName"
+                      className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-slate-500"
+                    >
+                      Banco ou espuma
+                    </label>
+                    <Input
+                      id="productName"
+                      placeholder="Ex.: Banco CG 160 personalizado"
+                      {...register("productName")}
+                    />
+                    {errors.productName ? (
+                      <p className="text-sm text-danger">{errors.productName.message}</p>
+                    ) : null}
+                  </div>
+                ) : (
+                  <input type="hidden" {...register("productName")} />
+                )}
 
                 <div className="space-y-2">
                   <label
@@ -258,16 +262,22 @@ export function SalesForm({
                   >
                     Categoria
                   </label>
-                  <Input
-                    id="productCategory"
-                    list="product-categories"
-                    placeholder="Selecione ou digite: Bancos / Espumas"
-                    {...register("productCategory")}
-                  />
-                  <datalist id="product-categories">
-                    <option value="Bancos" />
-                    <option value="Espumas" />
-                  </datalist>
+                  {initialData ? (
+                    <>
+                      <Input
+                        id="productCategory"
+                        list="product-categories"
+                        placeholder="Selecione ou digite: Bancos / Espumas"
+                        {...register("productCategory")}
+                      />
+                      <datalist id="product-categories">
+                        <option value="Bancos" />
+                        <option value="Espumas" />
+                      </datalist>
+                    </>
+                  ) : (
+                    <Input id="productCategory" {...register("productCategory")} readOnly />
+                  )}
                 </div>
 
                 <div className="space-y-2">
@@ -277,12 +287,19 @@ export function SalesForm({
                   >
                     Status da venda
                   </label>
-                  <Select id="status" {...register("status")}>
-                    <option value="pending">Pendente</option>
-                    <option value="paid">Pago</option>
-                    <option value="completed">Concluído</option>
-                    <option value="cancelled">Cancelado</option>
-                  </Select>
+                  {initialData ? (
+                    <Select id="status" {...register("status")}>
+                      <option value="pending">Pendente</option>
+                      <option value="paid">Pago</option>
+                      <option value="completed">Concluído</option>
+                      <option value="cancelled">Cancelado</option>
+                    </Select>
+                  ) : (
+                    <>
+                      <Input id="status" value="Pago" readOnly />
+                      <input type="hidden" {...register("status")} />
+                    </>
+                  )}
                 </div>
 
                 <div className="space-y-2">
