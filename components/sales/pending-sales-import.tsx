@@ -73,6 +73,20 @@ const receiptSalesBatch: ImportBatch = {
   ]
 };
 
+const additionalSalesBatch: ImportBatch = {
+  title: "5 vendas adicionais de 13/10/2026",
+  prefix: "LOTE-ADICIONAL-2026-10-13",
+  description: "Categoria Espumas, status Pago, quantidade 1 e pagamento via Pix.",
+  notes: "Importação em lote das vendas adicionais informadas em 13/10/2026.",
+  sales: [
+    { customerName: "Tapeçaria Arthur Tomas", unitPrice: 65, saleDate: "2026-10-13" },
+    { customerName: "Vanderlei", unitPrice: 218, saleDate: "2026-10-13" },
+    { customerName: "Tapeceiro Cambé", unitPrice: 250, saleDate: "2026-10-13" },
+    { customerName: "Art Manhã Estofados", unitPrice: 140, saleDate: "2026-10-13" },
+    { customerName: "Roberto Tapeçaria", unitPrice: 400, saleDate: "2026-10-13" }
+  ]
+};
+
 function ImportBatchCard({ batch }: { batch: ImportBatch }) {
   const router = useRouter();
   const [isImporting, setIsImporting] = useState(false);
@@ -196,6 +210,7 @@ function ImportBatchCard({ batch }: { batch: ImportBatch }) {
 export function PendingSalesImport() {
   return (
     <div className="space-y-4">
+      <ImportBatchCard batch={additionalSalesBatch} />
       <ImportBatchCard batch={receiptSalesBatch} />
       <ImportBatchCard batch={informedSalesBatch} />
     </div>
