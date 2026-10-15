@@ -73,6 +73,28 @@ const receiptSalesBatch: ImportBatch = {
   ]
 };
 
+const whatsappSalesBatch: ImportBatch = {
+  title: "12 vendas de 14 e 15/10/2026",
+  prefix: "LOTE-WHATSAPP-2026-10-14-15",
+  description:
+    "Sete vendas de 14/10 e cinco vendas de 15/10, categoria Espumas, status Pago, quantidade 1 e pagamento via Pix.",
+  notes: "Importação em lote das vendas recebidas pelo WhatsApp em 14 e 15/10/2026.",
+  sales: [
+    { customerName: "DWR Tapeçaria", unitPrice: 1500, saleDate: "2026-10-14" },
+    { customerName: "Leandro", unitPrice: 340, saleDate: "2026-10-14" },
+    { customerName: "Beto Tapeçaria", unitPrice: 288, saleDate: "2026-10-14" },
+    { customerName: "Arnaldo", unitPrice: 145, saleDate: "2026-10-14" },
+    { customerName: "Magal", unitPrice: 280, saleDate: "2026-10-14" },
+    { customerName: "Tapeçaria 2 Irmãos", unitPrice: 60, saleDate: "2026-10-14" },
+    { customerName: "Tapeçaria Londrina", unitPrice: 1100, saleDate: "2026-10-14" },
+    { customerName: "Soufã Estofados", unitPrice: 1000, saleDate: "2026-10-15" },
+    { customerName: "Tapeçaria de Cadeira", unitPrice: 450, saleDate: "2026-10-15" },
+    { customerName: "Stilus", unitPrice: 335, saleDate: "2026-10-15" },
+    { customerName: "Arnaldo", unitPrice: 200, saleDate: "2026-10-15" },
+    { customerName: "Andreia", unitPrice: 638, saleDate: "2026-10-15" }
+  ]
+};
+
 const additionalSalesBatch: ImportBatch = {
   title: "5 vendas adicionais de 13/10/2026",
   prefix: "LOTE-ADICIONAL-2026-10-13",
@@ -254,6 +276,7 @@ function ImportBatchCard({ batch }: { batch: ImportBatch }) {
 export function PendingSalesImport() {
   return (
     <div className="space-y-4">
+      <ImportBatchCard batch={whatsappSalesBatch} />
       <ImportBatchCard batch={additionalSalesBatch} />
       <ImportBatchCard batch={receiptSalesBatch} />
       <ImportBatchCard batch={informedSalesBatch} />
