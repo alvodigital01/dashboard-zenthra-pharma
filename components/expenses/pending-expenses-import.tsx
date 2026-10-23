@@ -70,12 +70,193 @@ const expensesToImport = [
   }
 ] as const;
 
-const importTotal = expensesToImport.reduce((total, expense) => total + expense.amount, 0);
 const importMarkers = expensesToImport.map(
   (_, index) => `${IMPORT_PREFIX}-${String(index + 1).padStart(2, "0")}`
 );
 
-export function PendingExpensesImport() {
+const october23ExpensesToImport = [
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Combustível da van",
+    "category": "Variável",
+    "amount": 200
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Cola para emendar espumas",
+    "category": "Matéria-prima",
+    "amount": 290
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Documento da van",
+    "category": "Outros",
+    "amount": 390
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Vistoria para transferência da van",
+    "category": "Outros",
+    "amount": 200
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Taxas de cartão e parcelamentos (valor aproximado)",
+    "category": "Variável",
+    "amount": 500
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Separadores (anotação original: 4/10)",
+    "category": "Matéria-prima",
+    "amount": 1000
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Separadores",
+    "category": "Matéria-prima",
+    "amount": 500
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Ricardo - 3 viagens",
+    "category": "Variável",
+    "amount": 600
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Percinta elástica",
+    "category": "Matéria-prima",
+    "amount": 770
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Gasolina",
+    "category": "Variável",
+    "amount": 100
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Retrovisor da van",
+    "category": "Variável",
+    "amount": 60
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Gasolina",
+    "category": "Variável",
+    "amount": 50
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Cortador de espuma - Mandaguari",
+    "category": "Outros",
+    "amount": 50
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Ricardo - 2 viagens de frete",
+    "category": "Variável",
+    "amount": 400
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Separadores - Elexandro",
+    "category": "Matéria-prima",
+    "amount": 600
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Separadores - Elexandro",
+    "category": "Matéria-prima",
+    "amount": 600
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Separadores - Sebastião",
+    "category": "Matéria-prima",
+    "amount": 150
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Espumas",
+    "category": "Matéria-prima",
+    "amount": 780
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Separadores de espumas - Elexandro",
+    "category": "Matéria-prima",
+    "amount": 200
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Sebastião",
+    "category": "Outros",
+    "amount": 159
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Ronivaldo - laminador de espumas que trabalha para Ricardo",
+    "category": "Outros",
+    "amount": 265
+  },
+  {
+    "expenseDate": "2026-10-16",
+    "description": "Espumas - Master Comfort",
+    "category": "Matéria-prima",
+    "amount": 625
+  },
+  {
+    "expenseDate": "2026-10-20",
+    "description": "Espumas - Master Comfort",
+    "category": "Matéria-prima",
+    "amount": 1225
+  },
+  {
+    "expenseDate": "2026-10-21",
+    "description": "Gasto da van",
+    "category": "Variável",
+    "amount": 250
+  },
+  {
+    "expenseDate": "2026-10-22",
+    "description": "Espumas - Master Comfort",
+    "category": "Matéria-prima",
+    "amount": 1400
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Espumas - Master Comfort",
+    "category": "Matéria-prima",
+    "amount": 1100
+  },
+  {
+    "expenseDate": "2026-10-23",
+    "description": "Espumas - Master Comfort",
+    "category": "Matéria-prima",
+    "amount": 1400
+  }
+] as const;
+
+const october23ImportMarkers = october23ExpensesToImport.map(
+  (_, index) => `LOTE-GASTOS-2026-10-23-${String(index + 1).padStart(2, "0")}`
+);
+
+type ImportExpense = {
+  expenseDate: string;
+  description: string;
+  category: string;
+  amount: number;
+};
+
+function ExpenseBatchCard({ expensesToImport, importMarkers, title, description }: {
+  expensesToImport: readonly ImportExpense[];
+  importMarkers: string[];
+  title: string;
+  description: string;
+}) {
+  const importTotal = expensesToImport.reduce((total, expense) => total + expense.amount, 0);
   const router = useRouter();
   const [isImporting, setIsImporting] = useState(false);
   const [isChecking, setIsChecking] = useState(true);
@@ -110,7 +291,7 @@ export function PendingExpensesImport() {
     return () => {
       isActive = false;
     };
-  }, []);
+  }, [importMarkers]);
 
   const handleImport = async () => {
     const supabase = createBrowserSupabaseClient();
@@ -167,7 +348,7 @@ export function PendingExpensesImport() {
     if (!pendingRows.length) {
       setIsImporting(false);
       setIsComplete(true);
-      toast.info("Os 9 gastos deste lote já foram importados.");
+      toast.info(`Os ${expensesToImport.length} gastos deste lote já foram importados.`);
       return;
     }
 
@@ -197,10 +378,9 @@ export function PendingExpensesImport() {
     <Card className="border-[rgba(138,105,47,0.24)] bg-[linear-gradient(135deg,#fffdf8,#f7efe0)]">
       <CardHeader className="pb-4">
         <CardDescription>Importação preparada</CardDescription>
-        <CardTitle>9 gastos de outubro de 2026</CardTitle>
+        <CardTitle>{title}</CardTitle>
         <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
-          Total de {formatCurrencyBRL(importTotal)}, com datas conforme as informações e os comprovantes,
-          pagamento via Pix e categorias organizadas por tipo de gasto.
+          Total de {formatCurrencyBRL(importTotal)}. {description}
         </p>
       </CardHeader>
       <CardContent className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -221,9 +401,28 @@ export function PendingExpensesImport() {
               ? "Importando..."
               : isComplete
                 ? "Lote já importado"
-                : "Importar 9 gastos"}
+                : `Importar ${expensesToImport.length} gastos`}
         </Button>
       </CardContent>
     </Card>
+  );
+}
+
+export function PendingExpensesImport() {
+  return (
+    <div className="space-y-4">
+      <ExpenseBatchCard
+        expensesToImport={october23ExpensesToImport}
+        importMarkers={october23ImportMarkers}
+        title="27 gastos do lote de 23/10/2026"
+        description="Gastos por texto em 23/10 e comprovantes nas respectivas datas, pagamento via Pix. Inclui duas saídas de R$ 600 para Elexandro e R$ 500 aproximados de taxas. A anotação 4/10 foi preservada na descrição dos separadores."
+      />
+      <ExpenseBatchCard
+        expensesToImport={expensesToImport}
+        importMarkers={importMarkers}
+        title="9 gastos de outubro de 2026"
+        description="Datas conforme as informações e os comprovantes, pagamento via Pix e categorias organizadas por tipo de gasto."
+      />
+    </div>
   );
 }
