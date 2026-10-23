@@ -109,6 +109,33 @@ const additionalSalesBatch: ImportBatch = {
   ]
 };
 
+const whatsappOctober23SalesBatch: ImportBatch = {
+  title: "18 vendas de 23/10/2026",
+  prefix: "LOTE-WHATSAPP-2026-10-23",
+  description: "Categoria Espumas, status Pago, quantidade 1 e pagamento via Pix.",
+  notes: "Importação em lote das vendas recebidas pelo WhatsApp em 23/10/2026.",
+  sales: [
+    { customerName: "JC Estofados", unitPrice: 400, saleDate: "2026-10-23" },
+    { customerName: "Tapeçaria", unitPrice: 115, saleDate: "2026-10-23" },
+    { customerName: "Tapeçaria Londrina", unitPrice: 870, saleDate: "2026-10-23" },
+    { customerName: "Fábrica de Capa Instrumento", unitPrice: 1150, saleDate: "2026-10-23" },
+    { customerName: "Tapeçaria Iguaçu", unitPrice: 120, saleDate: "2026-10-23" },
+    { customerName: "Arena Estofados", unitPrice: 1400, saleDate: "2026-10-23" },
+    { customerName: "Tapeçaria Avenida", unitPrice: 434, saleDate: "2026-10-23" },
+    { customerName: "Tapeçaria Avenida", unitPrice: 200, saleDate: "2026-10-23" },
+    { customerName: "Graciosa", unitPrice: 220, saleDate: "2026-10-23" },
+    { customerName: "Geraldo", unitPrice: 300, saleDate: "2026-10-23" },
+    { customerName: "Administrador Grupo", unitPrice: 160, saleDate: "2026-10-23" },
+    { customerName: "Hadriani", unitPrice: 700, saleDate: "2026-10-23" },
+    { customerName: "Rosely", unitPrice: 80, saleDate: "2026-10-23" },
+    { customerName: "Tapeçaria Iguaçu", unitPrice: 200, saleDate: "2026-10-23" },
+    { customerName: "Atilus Estofado", unitPrice: 100, saleDate: "2026-10-23" },
+    { customerName: "JC Estofados", unitPrice: 280, saleDate: "2026-10-23" },
+    { customerName: "Júnior", unitPrice: 1000, saleDate: "2026-10-23" },
+    { customerName: "Prado Tapeçaria", unitPrice: 720, saleDate: "2026-10-23" }
+  ]
+};
+
 function ImportBatchCard({ batch }: { batch: ImportBatch }) {
   const router = useRouter();
   const [isImporting, setIsImporting] = useState(false);
@@ -276,6 +303,7 @@ function ImportBatchCard({ batch }: { batch: ImportBatch }) {
 export function PendingSalesImport() {
   return (
     <div className="space-y-4">
+      <ImportBatchCard batch={whatsappOctober23SalesBatch} />
       <ImportBatchCard batch={whatsappSalesBatch} />
       <ImportBatchCard batch={additionalSalesBatch} />
       <ImportBatchCard batch={receiptSalesBatch} />
