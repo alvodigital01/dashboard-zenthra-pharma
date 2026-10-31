@@ -15,6 +15,8 @@ type ImportSale = {
   customerName: string;
   unitPrice: number;
   saleDate: string;
+  productName?: string;
+  productCategory?: string;
 };
 
 type ImportBatch = {
@@ -136,6 +138,41 @@ const whatsappOctober23SalesBatch: ImportBatch = {
   ]
 };
 
+const whatsappOctober31SalesBatch: ImportBatch = {
+  title: "24 vendas de 31/10/2026",
+  prefix: "LOTE-WHATSAPP-2026-10-31",
+  description:
+    "Todas com status Pago, inclusive as quatro originalmente a receber. Quantidade 1 e pagamento via Pix, conforme o padrão do importador.",
+  notes:
+    "Vendas informadas por Nicolas pelo WhatsApp em 31/10/2026. Todas marcadas como pagas por solicitação do usuário. Quantidade, produto e pagamento seguem o padrão do importador quando não informados.",
+  sales: [
+    { customerName: "Não informado", unitPrice: 700, saleDate: "2026-10-31" },
+    { customerName: "Tio Ênio", unitPrice: 69.9, saleDate: "2026-10-31", productName: "Grampo", productCategory: "Grampos" },
+    { customerName: "João", unitPrice: 198, saleDate: "2026-10-31" },
+    { customerName: "Elshaday", unitPrice: 150, saleDate: "2026-10-31" },
+    { customerName: "Tapeçaria Cadeira", unitPrice: 600, saleDate: "2026-10-31" },
+    { customerName: "Arnaldo", unitPrice: 260, saleDate: "2026-10-31" },
+    { customerName: "Santos Estofados", unitPrice: 219, saleDate: "2026-10-31" },
+    { customerName: "Júnior Soufã", unitPrice: 300, saleDate: "2026-10-31" },
+    { customerName: "Lucas Inovax", unitPrice: 200, saleDate: "2026-10-31" },
+    { customerName: "Léo", unitPrice: 760, saleDate: "2026-10-31" },
+    { customerName: "Zani", unitPrice: 450, saleDate: "2026-10-31" },
+    { customerName: "Stilus", unitPrice: 270, saleDate: "2026-10-31" },
+    { customerName: "Lucas", unitPrice: 69, saleDate: "2026-10-31" },
+    { customerName: "Júnior", unitPrice: 2000, saleDate: "2026-10-31" },
+    { customerName: "Tapeçaria Londrina", unitPrice: 890, saleDate: "2026-10-31" },
+    { customerName: "Fábrica de capas de instrumentos", unitPrice: 1500, saleDate: "2026-10-31" },
+    { customerName: "Júnior", unitPrice: 380, saleDate: "2026-10-31" },
+    { customerName: "Ativa Estofados", unitPrice: 400, saleDate: "2026-10-31" },
+    { customerName: "DWR", unitPrice: 520, saleDate: "2026-10-31" },
+    { customerName: "Aleatório", unitPrice: 37, saleDate: "2026-10-31" },
+    { customerName: "Léo Estofados", unitPrice: 740, saleDate: "2026-10-31" },
+    { customerName: "Edson Lopes", unitPrice: 1056, saleDate: "2026-10-31" },
+    { customerName: "JC Estofados", unitPrice: 150, saleDate: "2026-10-31" },
+    { customerName: "Andréia", unitPrice: 539, saleDate: "2026-10-31" }
+  ]
+};
+
 function ImportBatchCard({ batch }: { batch: ImportBatch }) {
   const router = useRouter();
   const [isImporting, setIsImporting] = useState(false);
@@ -222,8 +259,8 @@ function ImportBatchCard({ batch }: { batch: ImportBatch }) {
       return [
         {
           sale_date: sale.saleDate,
-          product_name: "Espuma",
-          product_category: "Espumas",
+          product_name: sale.productName ?? "Espuma",
+          product_category: sale.productCategory ?? "Espumas",
           quantity: 1,
           unit_price: sale.unitPrice,
           payment_method: "pix",
@@ -303,6 +340,7 @@ function ImportBatchCard({ batch }: { batch: ImportBatch }) {
 export function PendingSalesImport() {
   return (
     <div className="space-y-4">
+      <ImportBatchCard batch={whatsappOctober31SalesBatch} />
       <ImportBatchCard batch={whatsappOctober23SalesBatch} />
       <ImportBatchCard batch={whatsappSalesBatch} />
       <ImportBatchCard batch={additionalSalesBatch} />

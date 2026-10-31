@@ -243,6 +243,20 @@ const october23ImportMarkers = october23ExpensesToImport.map(
   (_, index) => `LOTE-GASTOS-2026-10-23-${String(index + 1).padStart(2, "0")}`
 );
 
+const october31ExpensesToImport = [
+  { expenseDate: "2026-10-31", description: "Compra de grampos para revenda", category: "Matéria-prima", amount: 1000 },
+  { expenseDate: "2026-10-31", description: "Combustível da van (200 + 100 + 100)", category: "Variável", amount: 400 },
+  { expenseDate: "2026-10-31", description: "Compra de fibra para revenda - Atman Brasil", category: "Matéria-prima", amount: 1205 },
+  { expenseDate: "2026-10-31", description: "Claude", category: "Fixo", amount: 118.4 },
+  { expenseDate: "2026-10-31", description: "Ricardo - 3 viagens", category: "Variável", amount: 600 },
+  { expenseDate: "2026-10-31", description: "Espuma / separadores (900 + 900)", category: "Matéria-prima", amount: 1800 },
+  { expenseDate: "2026-10-31", description: "Master Comfort (1332 + 1476 + 1188 + 975)", category: "Matéria-prima", amount: 4971 }
+] as const;
+
+const october31ImportMarkers = october31ExpensesToImport.map(
+  (_, index) => `LOTE-GASTOS-2026-10-31-${String(index + 1).padStart(2, "0")}`
+);
+
 type ImportExpense = {
   expenseDate: string;
   description: string;
@@ -411,6 +425,12 @@ function ExpenseBatchCard({ expensesToImport, importMarkers, title, description 
 export function PendingExpensesImport() {
   return (
     <div className="space-y-4">
+      <ExpenseBatchCard
+        expensesToImport={october31ExpensesToImport}
+        importMarkers={october31ImportMarkers}
+        title="7 gastos agrupados de 31/10/2026"
+        description="Gastos informados por Nicolas, agrupados por descrição. Ricardo: R$ 600 no total pelas três viagens. Pagamento via Pix conforme o padrão do importador."
+      />
       <ExpenseBatchCard
         expensesToImport={october23ExpensesToImport}
         importMarkers={october23ImportMarkers}
