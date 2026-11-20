@@ -257,6 +257,166 @@ const october31ImportMarkers = october31ExpensesToImport.map(
   (_, index) => `LOTE-GASTOS-2026-10-31-${String(index + 1).padStart(2, "0")}`
 );
 
+const novemberExpensesToImport = [
+  {
+    "expenseDate": "2026-11-03",
+    "description": "Compra de espumas - Master Comfort (origem: comprovante Ton)",
+    "category": "Matéria-prima",
+    "amount": 1512
+  },
+  {
+    "expenseDate": "2026-11-04",
+    "description": "Gasolina da van (origem: mensagem)",
+    "category": "Variável",
+    "amount": 100
+  },
+  {
+    "expenseDate": "2026-11-04",
+    "description": "Separadores (origem: mensagem)",
+    "category": "Matéria-prima",
+    "amount": 700
+  },
+  {
+    "expenseDate": "2026-11-05",
+    "description": "Lâminas (Pix) - Alessandro da Silva Molero (origem: comprovante Pix)",
+    "category": "Matéria-prima",
+    "amount": 753
+  },
+  {
+    "expenseDate": "2026-11-05",
+    "description": "Gasolina da van (lançado em 09/11 como \"dia 5\") (origem: mensagem)",
+    "category": "Variável",
+    "amount": 100
+  },
+  {
+    "expenseDate": "2026-11-05",
+    "description": "Aluguel Mandaguari - Adriano Silvestre dos Santos (origem: comprovante Ton)",
+    "category": "Fixo",
+    "amount": 2500
+  },
+  {
+    "expenseDate": "2026-11-06",
+    "description": "DAS MEI - Receita Federal (origem: comprovante Ton)",
+    "category": "Fixo",
+    "amount": 91.74
+  },
+  {
+    "expenseDate": "2026-11-06",
+    "description": "Compra de espumas - Master Comfort (origem: comprovante Ton)",
+    "category": "Matéria-prima",
+    "amount": 1188
+  },
+  {
+    "expenseDate": "2026-11-08",
+    "description": "Gasolina (lançado em 09/11 como \"de ontem\") (origem: mensagem)",
+    "category": "Variável",
+    "amount": 30
+  },
+  {
+    "expenseDate": "2026-11-09",
+    "description": "Compra de espumas - Master Comfort (origem: comprovante Ton)",
+    "category": "Matéria-prima",
+    "amount": 756
+  },
+  {
+    "expenseDate": "2026-11-09",
+    "description": "Compra - Atman Brasil (origem: comprovante Ton)",
+    "category": "Outros",
+    "amount": 115
+  },
+  {
+    "expenseDate": "2026-11-09",
+    "description": "Cola - Atman Brasil (origem: comprovante Ton)",
+    "category": "Matéria-prima",
+    "amount": 1035
+  },
+  {
+    "expenseDate": "2026-11-09",
+    "description": "Parcela da van (origem: mensagem)",
+    "category": "Variável",
+    "amount": 1000
+  },
+  {
+    "expenseDate": "2026-11-11",
+    "description": "Gasolina do carro — viagem a Mandaguari - Nicolas (origem: comprovante Pix)",
+    "category": "Variável",
+    "amount": 70
+  },
+  {
+    "expenseDate": "2026-11-11",
+    "description": "Mensalidade Bling - Bling (origem: comprovante Ton)",
+    "category": "Fixo",
+    "amount": 89
+  },
+  {
+    "expenseDate": "2026-11-11",
+    "description": "Parcela da van - Edivan Alves da Silva (origem: comprovante Pix)",
+    "category": "Variável",
+    "amount": 500
+  },
+  {
+    "expenseDate": "2026-11-12",
+    "description": "Compra de espumas (pago em 11/11) - Master Comfort (origem: comprovante Ton)",
+    "category": "Matéria-prima",
+    "amount": 1296
+  },
+  {
+    "expenseDate": "2026-11-12",
+    "description": "Aluguel do salão em Londrina (origem: mensagem)",
+    "category": "Fixo",
+    "amount": 2500
+  },
+  {
+    "expenseDate": "2026-11-12",
+    "description": "Compra de grampo (origem: mensagem)",
+    "category": "Matéria-prima",
+    "amount": 982
+  },
+  {
+    "expenseDate": "2026-11-12",
+    "description": "Pagamento sem rótulo no grupo - Luciana da Silva Francisco (origem: comprovante Ton)",
+    "category": "Outros",
+    "amount": 600
+  },
+  {
+    "expenseDate": "2026-11-12",
+    "description": "Documento da van - Claudio Cunha da Silva (origem: comprovante Pix)",
+    "category": "Variável",
+    "amount": 200
+  },
+  {
+    "expenseDate": "2026-11-16",
+    "description": "ChatGPT (origem: mensagem)",
+    "category": "Fixo",
+    "amount": 110
+  },
+  {
+    "expenseDate": "2026-11-16",
+    "description": "Compra de espumas - Master Comfort (origem: comprovante Ton)",
+    "category": "Matéria-prima",
+    "amount": 1656
+  },
+  {
+    "expenseDate": "2026-11-16",
+    "description": "Parcela da van - Edivan Alves da Silva (origem: comprovante Ton)",
+    "category": "Variável",
+    "amount": 500
+  },
+  {
+    "expenseDate": "2026-11-18",
+    "description": "Gasolina (origem: mensagem)",
+    "category": "Variável",
+    "amount": 40
+  },
+  {
+    "expenseDate": "2026-11-19",
+    "description": "Gasolina (origem: mensagem)",
+    "category": "Variável",
+    "amount": 50
+  }
+];
+const novemberImportMarkers = novemberExpensesToImport.map((_, index) => `LOTE-CSV-GASTOS-NOV-2026-${String(index + 1).padStart(2, "0")}`);
+
 type ImportExpense = {
   expenseDate: string;
   description: string;
@@ -425,6 +585,12 @@ function ExpenseBatchCard({ expensesToImport, importMarkers, title, description 
 export function PendingExpensesImport() {
   return (
     <div className="space-y-4">
+      <ExpenseBatchCard
+        expensesToImport={novemberExpensesToImport}
+        importMarkers={novemberImportMarkers}
+        title="26 gastos de novembro de 2026"
+        description="Datas e detalhes do CSV; categorias conforme a descrição e pagamento via Pix quando não informado."
+      />
       <ExpenseBatchCard
         expensesToImport={october31ExpensesToImport}
         importMarkers={october31ImportMarkers}

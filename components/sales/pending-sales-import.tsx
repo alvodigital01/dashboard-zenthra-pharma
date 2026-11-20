@@ -17,6 +17,9 @@ type ImportSale = {
   saleDate: string;
   productName?: string;
   productCategory?: string;
+  paymentMethod?: "pix" | "debit_card" | "credit_card";
+  installments?: number | null;
+  details?: string;
 };
 
 type ImportBatch = {
@@ -173,6 +176,653 @@ const whatsappOctober31SalesBatch: ImportBatch = {
   ]
 };
 
+const novemberSalesBatch: ImportBatch = {
+ title: "80 vendas de novembro de 2026", prefix: "LOTE-CSV-VENDAS-NOV-2026",
+ description: "Datas e detalhes do CSV. Categoria Espumas, quantidade 1 e status Pago; Pix quando o pagamento não foi informado. Cartão sem tipo ou parcelas foi registrado como crédito em 1 parcela.",
+ notes: "Importação do CSV de novembro de 2026.", sales: [
+  {
+    "customerName": "Tapeçaria Iguaçu",
+    "unitPrice": 500,
+    "saleDate": "2026-11-03",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda tapeçaria Iguaçu. Origem: mensagem."
+  },
+  {
+    "customerName": "Magal",
+    "unitPrice": 700,
+    "saleDate": "2026-11-03",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Tapeceiro",
+    "unitPrice": 84,
+    "saleDate": "2026-11-03",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "C.L Faria Estofados (JC)",
+    "unitPrice": 419,
+    "saleDate": "2026-11-03",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda JC Estofados (Pix recebido). Origem: comprovante Pix."
+  },
+  {
+    "customerName": "Art Manhã",
+    "unitPrice": 207,
+    "saleDate": "2026-11-03",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Zani",
+    "unitPrice": 500,
+    "saleDate": "2026-11-04",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Graciosa",
+    "unitPrice": 525,
+    "saleDate": "2026-11-04",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Rosely",
+    "unitPrice": 50,
+    "saleDate": "2026-11-04",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Ativa Estofados",
+    "unitPrice": 120,
+    "saleDate": "2026-11-04",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Max Estofados",
+    "unitPrice": 110,
+    "saleDate": "2026-11-04",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Fernando",
+    "unitPrice": 50,
+    "saleDate": "2026-11-04",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Ronaldo",
+    "unitPrice": 242,
+    "saleDate": "2026-11-04",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Stilus",
+    "unitPrice": 150,
+    "saleDate": "2026-11-04",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Crislane Aline Teste da Silva",
+    "unitPrice": 122,
+    "saleDate": "2026-11-05",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda João (Pix recebido). Origem: comprovante Pix."
+  },
+  {
+    "customerName": "Arnaldo",
+    "unitPrice": 100,
+    "saleDate": "2026-11-05",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "El Shaday",
+    "unitPrice": 580,
+    "saleDate": "2026-11-05",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Arena",
+    "unitPrice": 400,
+    "saleDate": "2026-11-05",
+    "paymentMethod": "credit_card",
+    "installments": 1,
+    "details": "Venda no cartão. Origem: mensagem."
+  },
+  {
+    "customerName": "Ismael Ruiz",
+    "unitPrice": 84,
+    "saleDate": "2026-11-05",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda DWR (Pix recebido). Origem: comprovante Pix."
+  },
+  {
+    "customerName": "Bianca da Silva Damasceno",
+    "unitPrice": 89,
+    "saleDate": "2026-11-06",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda Geraldo (Pix recebido). Origem: comprovante Pix."
+  },
+  {
+    "customerName": "Fernando",
+    "unitPrice": 30,
+    "saleDate": "2026-11-06",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Geraldo",
+    "unitPrice": 43,
+    "saleDate": "2026-11-06",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Alécio",
+    "unitPrice": 264,
+    "saleDate": "2026-11-06",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Zani",
+    "unitPrice": 477,
+    "saleDate": "2026-11-06",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Max Estofados",
+    "unitPrice": 350,
+    "saleDate": "2026-11-06",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Novo Ambiente",
+    "unitPrice": 300,
+    "saleDate": "2026-11-06",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Édson Lopes",
+    "unitPrice": 900,
+    "saleDate": "2026-11-06",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Rosely",
+    "unitPrice": 400,
+    "saleDate": "2026-11-07",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Novo Ambiente",
+    "unitPrice": 300,
+    "saleDate": "2026-11-09",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Stilus",
+    "unitPrice": 300,
+    "saleDate": "2026-11-09",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Ismael Ruiz",
+    "unitPrice": 520,
+    "saleDate": "2026-11-09",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda (Pix recebido). Origem: comprovante Pix."
+  },
+  {
+    "customerName": "Geraldo",
+    "unitPrice": 874,
+    "saleDate": "2026-11-09",
+    "paymentMethod": "debit_card",
+    "installments": null,
+    "details": "Venda no cartão de débito. Origem: mensagem."
+  },
+  {
+    "customerName": "Não informado",
+    "unitPrice": 231.9,
+    "saleDate": "2026-11-09",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda — anotada como \"perto do Marista\". Origem: mensagem."
+  },
+  {
+    "customerName": "Rafael Luiz Malvezi",
+    "unitPrice": 580,
+    "saleDate": "2026-11-10",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda El Shaday (Pix recebido). Origem: comprovante Pix."
+  },
+  {
+    "customerName": "Geraldo",
+    "unitPrice": 540,
+    "saleDate": "2026-11-10",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Júnior",
+    "unitPrice": 550,
+    "saleDate": "2026-11-12",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Zani",
+    "unitPrice": 638,
+    "saleDate": "2026-11-12",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Andréia",
+    "unitPrice": 270,
+    "saleDate": "2026-11-12",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Arthur Tomás",
+    "unitPrice": 300,
+    "saleDate": "2026-11-12",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Estofados Santos",
+    "unitPrice": 300,
+    "saleDate": "2026-11-12",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "JC Estofados",
+    "unitPrice": 450,
+    "saleDate": "2026-11-12",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Édson Lopes",
+    "unitPrice": 180,
+    "saleDate": "2026-11-12",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Andréia",
+    "unitPrice": 175,
+    "saleDate": "2026-11-12",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Tapeçaria Rolândia",
+    "unitPrice": 270,
+    "saleDate": "2026-11-12",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Tapeçaria Avenida",
+    "unitPrice": 150,
+    "saleDate": "2026-11-12",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Não informado",
+    "unitPrice": 1000,
+    "saleDate": "2026-11-12",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda da sobra das espumas de Mandaguari. Origem: mensagem."
+  },
+  {
+    "customerName": "Novo Ambiente",
+    "unitPrice": 170,
+    "saleDate": "2026-11-12",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Enio",
+    "unitPrice": 1100,
+    "saleDate": "2026-11-12",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Zani",
+    "unitPrice": 776,
+    "saleDate": "2026-11-12",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Alexandro",
+    "unitPrice": 158,
+    "saleDate": "2026-11-12",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Arnaldo",
+    "unitPrice": 350,
+    "saleDate": "2026-11-13",
+    "paymentMethod": "credit_card",
+    "installments": 1,
+    "details": "Venda no cartão. Origem: mensagem."
+  },
+  {
+    "customerName": "Não informado",
+    "unitPrice": 344,
+    "saleDate": "2026-11-13",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda — anotada só como \"344\". Origem: mensagem."
+  },
+  {
+    "customerName": "Brito",
+    "unitPrice": 340,
+    "saleDate": "2026-11-14",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Marcos",
+    "unitPrice": 100,
+    "saleDate": "2026-11-14",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Não informado",
+    "unitPrice": 50,
+    "saleDate": "2026-11-14",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Magal",
+    "unitPrice": 270,
+    "saleDate": "2026-11-14",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Não informado",
+    "unitPrice": 170,
+    "saleDate": "2026-11-14",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Andréia",
+    "unitPrice": 70,
+    "saleDate": "2026-11-16",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Fernando Alex Pereira Garcia",
+    "unitPrice": 130,
+    "saleDate": "2026-11-16",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda (Pix recebido). Origem: comprovante Pix."
+  },
+  {
+    "customerName": "C.L Faria Estofados (JC)",
+    "unitPrice": 258,
+    "saleDate": "2026-11-16",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda (Pix recebido). Origem: comprovante Pix."
+  },
+  {
+    "customerName": "Prado",
+    "unitPrice": 720,
+    "saleDate": "2026-11-16",
+    "paymentMethod": "credit_card",
+    "installments": 4,
+    "details": "Venda no cartão 4x. Origem: mensagem."
+  },
+  {
+    "customerName": "Lima",
+    "unitPrice": 300,
+    "saleDate": "2026-11-16",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Não informado",
+    "unitPrice": 570,
+    "saleDate": "2026-11-17",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda — anotada como \"atrás Marista\". Origem: mensagem."
+  },
+  {
+    "customerName": "AWR",
+    "unitPrice": 800,
+    "saleDate": "2026-11-17",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Stilus",
+    "unitPrice": 350,
+    "saleDate": "2026-11-17",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Baiano",
+    "unitPrice": 150,
+    "saleDate": "2026-11-17",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Marciano Lima Correia",
+    "unitPrice": 325,
+    "saleDate": "2026-11-18",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda (Pix recebido). Origem: comprovante Pix."
+  },
+  {
+    "customerName": "Arthur Tomás",
+    "unitPrice": 175,
+    "saleDate": "2026-11-18",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Art Gold",
+    "unitPrice": 750,
+    "saleDate": "2026-11-18",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Brito",
+    "unitPrice": 358,
+    "saleDate": "2026-11-18",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Vizinho",
+    "unitPrice": 250,
+    "saleDate": "2026-11-18",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Não informado",
+    "unitPrice": 180,
+    "saleDate": "2026-11-18",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Tapeceiro",
+    "unitPrice": 210,
+    "saleDate": "2026-11-18",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Léo",
+    "unitPrice": 1000,
+    "saleDate": "2026-11-18",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Não informado",
+    "unitPrice": 350,
+    "saleDate": "2026-11-19",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda — anotada só como \"350\". Origem: mensagem."
+  },
+  {
+    "customerName": "Vanderlei (Rolândia)",
+    "unitPrice": 300,
+    "saleDate": "2026-11-19",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Novo Ambiente",
+    "unitPrice": 500,
+    "saleDate": "2026-11-19",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Graciosa",
+    "unitPrice": 1795,
+    "saleDate": "2026-11-19",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Stilus",
+    "unitPrice": 255,
+    "saleDate": "2026-11-20",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Filadélfia",
+    "unitPrice": 56,
+    "saleDate": "2026-11-20",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  },
+  {
+    "customerName": "Zani",
+    "unitPrice": 636,
+    "saleDate": "2026-11-20",
+    "paymentMethod": "pix",
+    "installments": null,
+    "details": "Venda. Origem: mensagem."
+  }
+]
+};
+
 function ImportBatchCard({ batch }: { batch: ImportBatch }) {
   const router = useRouter();
   const [isImporting, setIsImporting] = useState(false);
@@ -268,7 +918,7 @@ function ImportBatchCard({ batch }: { batch: ImportBatch }) {
           customer_name: sale.customerName,
           order_code: orderCode,
           status: "paid",
-          notes: batch.notes,
+          notes: sale.details ? `${batch.notes} ${sale.details}` : batch.notes,
           user_id: user.id
         }
       ];
@@ -340,6 +990,7 @@ function ImportBatchCard({ batch }: { batch: ImportBatch }) {
 export function PendingSalesImport() {
   return (
     <div className="space-y-4">
+      <ImportBatchCard batch={novemberSalesBatch} />
       <ImportBatchCard batch={whatsappOctober31SalesBatch} />
       <ImportBatchCard batch={whatsappOctober23SalesBatch} />
       <ImportBatchCard batch={whatsappSalesBatch} />
