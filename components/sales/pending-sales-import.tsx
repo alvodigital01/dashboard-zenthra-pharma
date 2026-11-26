@@ -30,6 +30,39 @@ type ImportBatch = {
   sales: readonly ImportSale[];
 };
 
+const november26SalesBatch: ImportBatch = {
+  title: "24 vendas de 23 a 26/11/2026",
+  prefix: "LOTE-VENDAS-2026-11-23-26",
+  description: "Dados da planilha; categoria Espumas, quantidade 1 e pagamento Pix por padrão. A venda de R$ 469 foi informada como cartão, sem modalidade; confira e ajuste o pagamento após importar.",
+  notes: "Importação da planilha de 23 a 26/11/2026.",
+  sales: [
+    { customerName: "JC Estofados", unitPrice: 450, saleDate: "2026-11-23" },
+    { customerName: "Beto", unitPrice: 170, saleDate: "2026-11-23" },
+    { customerName: "Não informado", unitPrice: 469, saleDate: "2026-11-23", details: "Venda no cartão; modalidade não informada na planilha." },
+    { customerName: "Zani", unitPrice: 636, saleDate: "2026-11-23" },
+    { customerName: "AWR", unitPrice: 480, saleDate: "2026-11-24" },
+    { customerName: "Sem nome", unitPrice: 300, saleDate: "2026-11-24" },
+    { customerName: "Novo Ambiente", unitPrice: 300, saleDate: "2026-11-24" },
+    { customerName: "Lindolfo", unitPrice: 636, saleDate: "2026-11-24" },
+    { customerName: "Édson Lopes", unitPrice: 731, saleDate: "2026-11-24" },
+    { customerName: "Júnior", unitPrice: 180, saleDate: "2026-11-24" },
+    { customerName: "Arnaldo", unitPrice: 218, saleDate: "2026-11-24" },
+    { customerName: "Tapeçaria sob medida (Alessandra)", unitPrice: 500, saleDate: "2026-11-24" },
+    { customerName: "Paulo Serafim", unitPrice: 700, saleDate: "2026-11-24" },
+    { customerName: "Elshaday", unitPrice: 150, saleDate: "2026-11-24" },
+    { customerName: "Andréia", unitPrice: 420.12, saleDate: "2026-11-25" },
+    { customerName: "Cadeira (Marciano)", unitPrice: 125, saleDate: "2026-11-25" },
+    { customerName: "Max Estofados", unitPrice: 800, saleDate: "2026-11-25" },
+    { customerName: "Lourenço", unitPrice: 180, saleDate: "2026-11-25" },
+    { customerName: "Enio", unitPrice: 400, saleDate: "2026-11-25" },
+    { customerName: "Brito", unitPrice: 100, saleDate: "2026-11-26" },
+    { customerName: "Filadélfia (Rogério)", unitPrice: 428.6, saleDate: "2026-11-26" },
+    { customerName: "Ronaldo", unitPrice: 325, saleDate: "2026-11-26" },
+    { customerName: "Hudson", unitPrice: 300, saleDate: "2026-11-26" },
+    { customerName: "Júnior", unitPrice: 2000, saleDate: "2026-11-26" }
+  ]
+};
+
 const informedSalesBatch: ImportBatch = {
   title: "16 vendas de 13/10/2026",
   prefix: "LOTE-2026-10-13",
@@ -990,6 +1023,7 @@ function ImportBatchCard({ batch }: { batch: ImportBatch }) {
 export function PendingSalesImport() {
   return (
     <div className="space-y-4">
+      <ImportBatchCard batch={november26SalesBatch} />
       <ImportBatchCard batch={novemberSalesBatch} />
       <ImportBatchCard batch={whatsappOctober31SalesBatch} />
       <ImportBatchCard batch={whatsappOctober23SalesBatch} />

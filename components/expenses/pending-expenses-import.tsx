@@ -424,6 +424,22 @@ type ImportExpense = {
   amount: number;
 };
 
+const november26ExpensesToImport: readonly ImportExpense[] = [
+  { expenseDate: "2026-11-23", description: "Fibra", category: "Matéria-prima", amount: 1150 },
+  { expenseDate: "2026-11-23", description: "Master Comfort", category: "Matéria-prima", amount: 1224 },
+  { expenseDate: "2026-11-23", description: "Separadores", category: "Matéria-prima", amount: 100 },
+  { expenseDate: "2026-11-23", description: "Van - gasolina", category: "Variável", amount: 100 },
+  { expenseDate: "2026-11-23", description: "Máquina de cartão", category: "Outros", amount: 250 },
+  { expenseDate: "2026-11-25", description: "Combustível", category: "Variável", amount: 200 },
+  { expenseDate: "2026-11-25", description: "Cola", category: "Matéria-prima", amount: 100 },
+  { expenseDate: "2026-11-25", description: "Entrada aluguel novo salão", category: "Fixo", amount: 2000 },
+  { expenseDate: "2026-11-26", description: "Gasolina", category: "Variável", amount: 150 },
+  { expenseDate: "2026-11-26", description: "Master Comfort", category: "Matéria-prima", amount: 1764 }
+];
+const november26ImportMarkers = november26ExpensesToImport.map(
+  (_, index) => `LOTE-GASTOS-2026-11-23-26-${String(index + 1).padStart(2, "0")}`
+);
+
 function ExpenseBatchCard({ expensesToImport, importMarkers, title, description }: {
   expensesToImport: readonly ImportExpense[];
   importMarkers: string[];
@@ -585,6 +601,12 @@ function ExpenseBatchCard({ expensesToImport, importMarkers, title, description 
 export function PendingExpensesImport() {
   return (
     <div className="space-y-4">
+      <ExpenseBatchCard
+        expensesToImport={november26ExpensesToImport}
+        importMarkers={november26ImportMarkers}
+        title="10 gastos de 23 a 26/11/2026"
+        description="Datas e valores da planilha; categorias conforme a descrição e pagamento via Pix por padrão."
+      />
       <ExpenseBatchCard
         expensesToImport={novemberExpensesToImport}
         importMarkers={novemberImportMarkers}
